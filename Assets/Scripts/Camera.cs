@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public MeshRenderer mr;
+
+    public Transform target; // personagem
+    public Vector3 offset;   //  câmera em relação ao personagem
+    public float speed = 0.125f; // Velocidade 
+
+    void LateUpdate()
     {
-        
+        if (target != null)
+        {
+            Vector3 desiredPosition = target.position + offset;
+
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, speed);
+
+            transform.position = smoothedPosition;
+        }
     }
 }

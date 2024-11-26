@@ -6,20 +6,17 @@ public class Paralax : MonoBehaviour
 {
     public MeshRenderer mr;
 
-    public Transform target; // personagem
-    public Vector3 offset;   //  câmera em relação ao personagem
-    public float speed = 0.125f; // Velocidade 
-
-    void LateUpdate()
+    public float speed;
+    // Start is called before the first frame update
+    void Start()
     {
-        if (target != null)
-        {
-            Vector3 desiredPosition = target.position + offset;
 
-            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, speed);
+    }
 
-            transform.position = smoothedPosition;
-        }
+    // Update is called once per frame
+    void Update()
+    {
+        mr.material.mainTextureOffset += new Vector2(speed * Time.deltaTime, 0);
     }
 
 }
