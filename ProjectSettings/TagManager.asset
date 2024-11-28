@@ -3,12 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Projectile
+  - Fruit
+  - InstantDeath
+  - Hazard
+  - Star
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - CollisionWithPlayer
   - Water
   - UI
   - 
