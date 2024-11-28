@@ -10,6 +10,8 @@ TagManager:
   - Hazard
   - Star
   - Enemy
+  - UpdateDirection
+  - Ground
   layers:
   - Default
   - TransparentFX

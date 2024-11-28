@@ -9,6 +9,9 @@ public class Enemy: MonoBehaviour {
 
     // Enemy data
     public float horizontalSpeed = 6.0f;
+    public float frogMiniJumpSpeed;
+    public float frogBigJumpSpeed;
+    public float frogTimeOnGround;
 
     // Enemy movement
     private Rigidbody2D rigidBody;
@@ -39,9 +42,31 @@ public class Enemy: MonoBehaviour {
     void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        switch (enemyType) {
+            case 0: // Frog
+                StartFrog();
+                break;
+            case 1: // Opossum
+                StartOpossum();
+                break;
+            default:
+                break;
+        }
     }
 
     void Update() {
+        switch (enemyType) {
+            case 0: // Frog
+                UpdateFrog();
+                break;
+            case 1: // Opossum
+                UpdateOpossum();
+                break;
+            default:
+                break;
+        }
+
         if (invisibilityTimer > 0.0f) {
             invisibilityTimer -= Time.deltaTime;
             if (invisibilityTimer <= 0.0f) {
@@ -50,6 +75,38 @@ public class Enemy: MonoBehaviour {
             }
         }
         UpdateSprite();
+    }
+
+    void StartFrog() {
+        float gravity = 9.81f;
+        float timeMiniJump = 2.0f * frogMiniJumpSpeed / gravity;
+        float timeBigJump = 2.0f * frogBigJumpSpeed / gravity;
+        float period = timeMiniJump + timeBigJump + 2.0f * frogTimeOnGround;
+        InvokeRepeating("MiniJump", 0.0f, period);
+        InvokeRepeating("BigJump", frogTimeOnGround + timeMiniJump, period);
+    }
+
+    void UpdateFrog() {
+    }
+
+    void MiniJump() {
+        rigidBody.AddForce(Vector2.up * frogMiniJumpSpeed, ForceMode2D.Impulse);
+    }
+    
+    void BigJump() {
+        rigidBody.AddForce(Vector2.up * frogBigJumpSpeed, ForceMode2D.Impulse);
+    }
+
+    void StartOpossum() {
+
+    }
+
+    void UpdateOpossum() {
+        if (direction == 1.0f) {
+            rigidBody.velocity = new Vector3(horizontalSpeed, rigidBody.velocity.y, 0.0f);
+        } else {
+            rigidBody.velocity = new Vector3(-horizontalSpeed, rigidBody.velocity.y, 0.0f);
+        }
     }
 
     public void Hurt(int v) {
@@ -103,6 +160,12 @@ public class Enemy: MonoBehaviour {
         } else {
             spriteRenderer.enabled = false;
             spriteRenderer.color = Color.red;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("UpdateDirection")) {
+            direction = direction == 1.0f ? -1.0f : 1.0f;
         }
     }
 
