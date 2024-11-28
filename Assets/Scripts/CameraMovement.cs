@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour {
     public Vector3 offset = new Vector3(0f, 0f, -10f);
-    private float smoothTime = 0.25f;
+    [SerializeField] private float smoothTime = 0.25f;
     private Vector3 velocity = Vector3.zero;
     public Vector2 levelSize;
     public float cameraRange = 3.4f;
