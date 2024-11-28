@@ -514,6 +514,29 @@ public class Player: MonoBehaviour {
         }
     }
 
+    void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Hazard")) {
+            Hurt(1);
+        }
+
+        if (other.gameObject.CompareTag("Enemy")) {
+            Hurt(1);
+        }
+
+        if (other.gameObject.CompareTag("InstantDeath")) {
+            Kill();
+        }
+
+        if (other.gameObject.CompareTag("Fruit")) {
+            other.gameObject.SendMessage("OnPlayerContact", this);
+        }
+
+        if (other.gameObject.CompareTag("Star")) {
+            other.gameObject.SendMessage("OnPlayerContact", this);
+            state = 4; // Win
+        }
+    }
+
     public void Upgrade(int type) {
         this.projectileType = type;
         SetInvisible();

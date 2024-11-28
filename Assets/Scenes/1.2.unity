@@ -174,6 +174,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5343125520604122586, guid: 1138beb8c2ae81640955eea91cab33d3, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -281,7 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1186676315}
   - component: {fileID: 1186676314}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1229,7 +1233,7 @@ GameObject:
   - component: {fileID: 1728700299}
   - component: {fileID: 1728700303}
   - component: {fileID: 1728700302}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BlackWerewolf_0
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1410,13 +1414,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   horizontalSpeed: 18
-  aggressiveForce: {x: 9, y: 5}
+  aggressiveForce: {x: 13, y: 6}
   health: 15
   blinkCycleSeconds: 0.07
   maxInvisibleTime: 1
   destroyFx: {fileID: 0}
   maxStandingTime: 1
-  maxRunningTime: 0.3
+  maxRunningTime: 0.45
   maxAttackingTime: 0.5
   generalTimer: 0
 --- !u!1 &1805037073
