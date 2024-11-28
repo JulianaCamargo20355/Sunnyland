@@ -30,11 +30,12 @@ public class Player: MonoBehaviour {
     public float maxInvisibleTime = 1.0f;
     public float maxHitTime = 0.5f;
     public Vector2 wallJumpForce = new Vector2(7.0f, 7.0f);
+    public Vector2 knockbackForce = new Vector2(7.0f, 7.0f);
 
     // Player movement
     private Rigidbody2D rigidBody;
     public bool isJumping = false;
-    private bool onGround = true;
+    public bool onGround = true;
     private bool isJumpCut = false;
     private bool isFalling = false;
     private float wallJumpDirection;
@@ -105,7 +106,15 @@ public class Player: MonoBehaviour {
         }
 
         if (Input.GetKeyDown("q")) {
-            state = 2;
+            Hurt(1);
+        }
+
+        if (Input.GetKeyDown("w")) {
+            state = 4;
+        }
+
+        if (Input.GetKeyDown("k")) {
+            Knockback(1.0f);
         }
 
         UpdateTimers();
@@ -219,10 +228,6 @@ public class Player: MonoBehaviour {
 
                 direction = wallJumpDirection;
                 WallJump(wallJumpDirection);
-                isJumping = false;
-                isJumpCut = false;
-                isFalling = false;
-                state = 3;
             }
 
             if (rigidBody.velocity.y < 0.0f) {
@@ -265,12 +270,6 @@ public class Player: MonoBehaviour {
     }
 
     void HurtUpdate() {
-        if (direction == 1.0f) {
-            rigidBody.velocity = new Vector3(-hitSpeed, rigidBody.velocity.y, 0.0f);
-        } else {
-            rigidBody.velocity = new Vector3(hitSpeed, rigidBody.velocity.y, 0.0f);
-        }
-
         if (invisibilityTimer > 0.0f) {
             invisibilityTimer -= Time.deltaTime;
             if (invisibilityTimer <= 0.0f) {
@@ -287,7 +286,7 @@ public class Player: MonoBehaviour {
         }
     }
 
-    void Jump(float velocity) {
+    public void Jump(float velocity) {
         float force = velocity - rigidBody.velocity.y;
         rigidBody.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         isJumping = true;
@@ -297,9 +296,25 @@ public class Player: MonoBehaviour {
         onGround = false;
     }
 
-    void WallJump(float dir) {
+    public void WallJump(float dir) {
         Vector2 force = new Vector2(wallJumpForce.x, wallJumpForce.y);
 		force.x *= dir;
+		if (Mathf.Sign(rigidBody.velocity.x) != Mathf.Sign(force.x)) {
+			force.x -= rigidBody.velocity.x;
+        }
+		if (rigidBody.velocity.y < 0) {
+			force.y -= rigidBody.velocity.y;
+        }
+		rigidBody.AddForce(force, ForceMode2D.Impulse);
+        isJumping = false;
+        isJumpCut = false;
+        isFalling = false;
+        state = 3;
+    }
+
+    public void Knockback(float factor) {
+        Vector2 force = new Vector2(knockbackForce.x * factor, knockbackForce.y * factor);
+		force.x *= -direction;
 		if (Mathf.Sign(rigidBody.velocity.x) != Mathf.Sign(force.x)) {
 			force.x -= rigidBody.velocity.x;
         }
@@ -414,7 +429,7 @@ public class Player: MonoBehaviour {
         //SetInvisible();
     }
 
-    public void Hurt(int damageAmount) {
+    public void Hurt(int damageAmount, bool stronger = false) {
         if (invisibilityTimer > 0.0f) {
             return;        
         }
@@ -422,6 +437,11 @@ public class Player: MonoBehaviour {
         if (health <= 0) {
             Kill();
             return;
+        }
+        if (!stronger) {
+            Knockback(1.0f);
+        } else {
+            Knockback(2.0f);
         }
         SetInvisible();
     }

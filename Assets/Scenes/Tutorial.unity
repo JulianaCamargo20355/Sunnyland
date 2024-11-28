@@ -830,6 +830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: -10}
+  smoothTime: 0.25
   levelSize: {x: 16.11, y: 10}
   cameraRange: 3.4
   scrollRange: 3.4
@@ -6473,6 +6474,7 @@ GameObject:
   - component: {fileID: 1695649032}
   - component: {fileID: 1695649036}
   - component: {fileID: 1695649035}
+  - component: {fileID: 1695649037}
   m_Layer: 0
   m_Name: frog-idle-1
   m_TagString: Enemy
@@ -6600,7 +6602,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.00000011920929, y: -0.0079256855}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -6611,7 +6613,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.35, y: 0.32}
+  m_Size: {x: 0.19129694, y: 0.1583153}
   m_EdgeRadius: 0
 --- !u!114 &1695649036
 MonoBehaviour:
@@ -6628,6 +6630,9 @@ MonoBehaviour:
   state: 0
   enemyType: 0
   horizontalSpeed: 6
+  frogMiniJumpSpeed: 2
+  frogBigJumpSpeed: 4
+  frogTimeOnGround: 1.5
   direction: -1
   groundCheckSize: {x: 0.13, y: 1.2}
   groundLayer:
@@ -6642,6 +6647,33 @@ MonoBehaviour:
   blinkCycleSeconds: 0.07
   maxInvisibleTime: 1
   destroyFx: {fileID: 843527598200146930, guid: 09cba043c6404ae4f8968cafdd8e4834, type: 3}
+--- !u!50 &1695649037
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695649031}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1753570628
 GameObject:
   m_ObjectHideFlags: 0
@@ -6655,6 +6687,7 @@ GameObject:
   - component: {fileID: 1753570629}
   - component: {fileID: 1753570633}
   - component: {fileID: 1753570632}
+  - component: {fileID: 1753570634}
   m_Layer: 0
   m_Name: frog-idle-1 (1)
   m_TagString: Enemy
@@ -6782,7 +6815,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.008158937, y: -0.008257017}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -6793,7 +6826,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.35, y: 0.32}
+  m_Size: {x: 0.21129921, y: 0.17137286}
   m_EdgeRadius: 0
 --- !u!114 &1753570633
 MonoBehaviour:
@@ -6810,6 +6843,9 @@ MonoBehaviour:
   state: 0
   enemyType: 0
   horizontalSpeed: 6
+  frogMiniJumpSpeed: 2
+  frogBigJumpSpeed: 4
+  frogTimeOnGround: 1.5
   direction: -1
   groundCheckSize: {x: 0.13, y: 0.2}
   groundLayer:
@@ -6824,6 +6860,33 @@ MonoBehaviour:
   blinkCycleSeconds: 0.07
   maxInvisibleTime: 1
   destroyFx: {fileID: 843527598200146930, guid: 09cba043c6404ae4f8968cafdd8e4834, type: 3}
+--- !u!50 &1753570634
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753570628}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1800139762
 GameObject:
   m_ObjectHideFlags: 0
