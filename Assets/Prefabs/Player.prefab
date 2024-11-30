@@ -101,7 +101,7 @@ Animator:
   m_GameObject: {fileID: 5343125520604122560}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e4cff99bdcba65045bd79a993cb7a7cd, type: 2}
+  m_Controller: {fileID: 9100000, guid: ab9957b3d44ed9b49abf8ca7940dc7bb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -175,7 +175,6 @@ MonoBehaviour:
   accelerationSpeed: 2
   brakeSpeed: 1
   horizontalSpeed: 6
-  hitSpeed: 2.2
   maxFallSpeed: 7
   coyoteTime: 0.2
   timeBetweenBullets: 0.5
@@ -183,7 +182,13 @@ MonoBehaviour:
   maxInvisibleTime: 1.7
   maxHitTime: 0.5
   wallJumpForce: {x: 7, y: 7}
+  knockbackForce: {x: 7, y: 7}
+  defaultGravity: 2.25
+  waterGravity: 0.38
+  waterGravityFactor: 0.5
+  currentFactor: 1
   isJumping: 0
+  onGround: 1
   groundCheckPoint: {fileID: 5343125521321155645}
   groundCheckSize: {x: 0.42, y: 0.11}
   groundLayer:
@@ -200,7 +205,12 @@ MonoBehaviour:
   hasDoubleJump: 1
   hasWallJump: 1
   projectilePrefab: {fileID: 8868399157209923230, guid: 13eb7342d1eaa6c41a0ea30d70d9a452, type: 3}
-  points: 0
+  fruitCount: 0
+  gemCount: 0
+  starCount: 0
+  enemyCount: 0
+  fruitsRemaining: 0
+  star: {fileID: 0}
   hearts: []
   deathParticleSystem: {fileID: 0}
 --- !u!50 &5343125520604122565

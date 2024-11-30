@@ -12,6 +12,7 @@ public class Enemy: MonoBehaviour {
     public float frogMiniJumpSpeed;
     public float frogBigJumpSpeed;
     public float frogTimeOnGround;
+    public Player player;
 
     // Enemy movement
     private Rigidbody2D rigidBody;
@@ -34,10 +35,12 @@ public class Enemy: MonoBehaviour {
     public bool canBeHurt = true;
     public float blinkCycleSeconds = 0.07f;
     public float maxInvisibleTime = 1.0f;
+    public float gemRng = 0.4f;
 
     // Rendering
     private SpriteRenderer spriteRenderer;
     [SerializeField] private GameObject destroyFx;
+    [SerializeField] private Gem gem;
 
     void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -53,6 +56,8 @@ public class Enemy: MonoBehaviour {
             default:
                 break;
         }
+
+        player.enemyCount += 1;
     }
 
     void Update() {
@@ -87,6 +92,11 @@ public class Enemy: MonoBehaviour {
     }
 
     void UpdateFrog() {
+        if (player.transform.position.x > transform.position.x) {
+            direction = 1.0f;
+        } else {
+            direction = -1.0f;
+        }
     }
 
     void MiniJump() {
@@ -144,6 +154,10 @@ public class Enemy: MonoBehaviour {
     public void Kill() {
         health = 0;
         Instantiate(destroyFx, transform.position, Quaternion.identity);
+        if (gem && Random.value < gemRng) {
+            Instantiate(gem, transform.position, Quaternion.identity);
+        }
+        player.OnEnemyDestroy();
         Destroy(this.gameObject);
     }
 

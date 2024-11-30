@@ -4,19 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Fruit: MonoBehaviour {
-    public GameObject destroyPrefab;
     public int powerUpType;
-    public bool healPlayer = true;
+    public bool healPlayer = false;
+    public Player player;
+
+    void Start() {
+        player.fruitsRemaining += 1;
+    }
 
     void OnPlayerContact(Player player) {
+        player.OnFruitCollect(powerUpType);
         if (healPlayer) {
             player.Heal(1);
         }
         if (powerUpType != 0) {
             player.Upgrade(powerUpType);
-        }
-        if (destroyPrefab) {
-            Instantiate(destroyPrefab, transform.position, Quaternion.identity);
         }
         Destroy(this.gameObject);
     }

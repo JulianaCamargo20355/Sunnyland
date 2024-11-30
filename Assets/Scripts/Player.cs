@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /**
  * Organized this way:
@@ -22,7 +23,6 @@ public class Player: MonoBehaviour {
     public float accelerationSpeed = 2.0f;
     public float brakeSpeed = 1.0f;
     public float horizontalSpeed = 6.0f;
-    public float hitSpeed = 2.2f;
     public float maxFallSpeed = 7.0f;
     public float coyoteTime = 0.5f;
     public float timeBetweenBullets = 0.5f;
@@ -31,6 +31,10 @@ public class Player: MonoBehaviour {
     public float maxHitTime = 0.5f;
     public Vector2 wallJumpForce = new Vector2(7.0f, 7.0f);
     public Vector2 knockbackForce = new Vector2(7.0f, 7.0f);
+    public float defaultGravity = 2.25f;
+    public float waterGravity = 0.38f;
+    public float waterGravityFactor = 0.5f;
+    public float currentFactor = 1.0f;
 
     // Player movement
     private Rigidbody2D rigidBody;
@@ -43,6 +47,16 @@ public class Player: MonoBehaviour {
     private Vector2 motion;
     private bool canDoubleJump = false;
     private bool canShoot = true;
+    private bool onWater = false;
+    private float currentJumpSpeed;
+    private float currentDoubleJumpSpeed;
+
+    // Abilities
+    public int projectileType = 1;
+    public bool hasCrouch = true;
+    public bool hasDoubleJump = true;
+    public bool hasWallJump = true;
+    public int abilityToGain;
  
     // Collision
     [SerializeField] private Transform groundCheckPoint;
@@ -60,26 +74,31 @@ public class Player: MonoBehaviour {
     private float wallRightTimer;
     private float launchTimer;
     [SerializeField] private float winTimer = 2.0f;
+    private float crouchTimer;
 
     // Player status
     public int health = 3;
     public int maxHealth = 3;
-    public int projectileType = 1;
     private int blinkType = 0;
     public bool canBeHurt = true;
-    public bool hasDoubleJump = true;
-    public bool hasWallJump = true;
     public Projectile projectilePrefab;
-    public int points;
+    public int fruitCount;
+    public int gemCount;
+    public int starCount;
+    public int enemyCount;
+    public int fruitsRemaining;
+    public Star star;
 
     // Rendering
     private SpriteRenderer spriteRenderer;
     public Image[] hearts;
     public ParticleSystem deathParticleSystem;
+    private Animator animator;
 
     void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     void Update() {
@@ -100,6 +119,9 @@ public class Player: MonoBehaviour {
             case 4:
                 WinUpdate();
                 break;
+            case 5:
+                CrouchUpdate();
+                break;
             default:
                 state = 4;
                 break;
@@ -110,15 +132,33 @@ public class Player: MonoBehaviour {
         }
 
         if (Input.GetKeyDown("w")) {
-            state = 4;
+            onWater = true;
         }
 
         if (Input.GetKeyDown("k")) {
             Knockback(1.0f);
         }
 
+        if (onWater) {
+            rigidBody.gravityScale = waterGravity;
+            currentJumpSpeed = jumpSpeed * waterGravityFactor;
+            currentDoubleJumpSpeed = doubleJumpSpeed * waterGravityFactor;
+            currentFactor = waterGravityFactor;
+        } else {
+            rigidBody.gravityScale = defaultGravity;
+            currentJumpSpeed = jumpSpeed;
+            currentDoubleJumpSpeed = doubleJumpSpeed;
+            currentFactor = 1.0f;
+        }
+
         UpdateTimers();
         UpdateSprite();
+
+        if (enemyCount <= 0 && fruitsRemaining <= 0) {
+            if (star) {
+                star.Activate();
+            }
+        }
     }
 
     void UpdateTimers() {
@@ -152,6 +192,12 @@ public class Player: MonoBehaviour {
                 wallRightTimer = 0.0f;
             }
         }
+        if (crouchTimer > 0.0f) {
+            crouchTimer -= Time.deltaTime;
+            if (crouchTimer <= 0.0f) {
+                crouchTimer = 0.0f;
+            }
+        }
         if (state != 2 && invisibilityTimer > 0.0f) {
             invisibilityTimer -= Time.deltaTime;
             if (invisibilityTimer <= 0.0f) {
@@ -169,6 +215,7 @@ public class Player: MonoBehaviour {
         wallLeftTimer = 0.0f;
         wallRightTimer = 0.0f;
         groundTimer = 0.0f;
+        crouchTimer = 0.0f;
     }
 
     void StandUpdate() {
@@ -182,7 +229,7 @@ public class Player: MonoBehaviour {
         groundTimer = coyoteTime;
 
         if (!isJumping && Input.GetKeyDown("z")) {
-            Jump(jumpSpeed);
+            Jump(currentJumpSpeed);
             state = 1;
             onGround = false;
             groundTimer = 0.0f;
@@ -190,6 +237,19 @@ public class Player: MonoBehaviour {
 
         if (!onGround) {
             state = 1;
+        }
+
+        if (Mathf.Abs(rigidBody.velocity.x) > 0.5f) {
+            animator.Play("run-Animation");
+
+            // Variable running speed timing
+            animator.SetFloat("RunAnimationSpeed", (Mathf.Abs(rigidBody.velocity.x) + 0.5f) / horizontalSpeed);
+        } else {
+            if (invisibilityTimer > 0) {
+                animator.Play("Dizzy");
+            } else {
+                animator.Play("foxidle");
+            }
         }
     }
 
@@ -201,7 +261,7 @@ public class Player: MonoBehaviour {
         if (groundTimer > 0.0f) {
             // Coyote jump
             if (!isJumping && Input.GetKeyDown("z")) {
-                Jump(jumpSpeed);
+                Jump(currentJumpSpeed);
                 groundTimer = 0.0f;
             }
         } else {
@@ -212,7 +272,7 @@ public class Player: MonoBehaviour {
 
             if (hasDoubleJump) {
                 if (!CanWallJump() && canDoubleJump && Input.GetKeyDown("z")) {
-                    Jump(doubleJumpSpeed);
+                    Jump(currentDoubleJumpSpeed);
                     canDoubleJump = false;
                 }
             }
@@ -235,6 +295,8 @@ public class Player: MonoBehaviour {
                 isJumping = false;
                 isJumpCut = false;
             }
+
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, Mathf.Max(rigidBody.velocity.y, -maxFallSpeed));
         }
 
         if (onGround) {
@@ -242,16 +304,33 @@ public class Player: MonoBehaviour {
             isJumping = false;
             isFalling = false;
         }
+
+        if (rigidBody.velocity.y < 0.0f) {
+            animator.Play("Fall");
+        } else {
+            animator.Play("Jump");
+        }
     }
 
     void WinUpdate() {
         rigidBody.velocity = new Vector2(0.0f, rigidBody.velocity.y);
-        if (winTimer > 0.0f) {
+        if (onGround && winTimer > 0.0f) {
             winTimer -= Time.deltaTime;
             if (winTimer <= 0.0f) {
                 // Next scene
+                winTimer = 2.0f;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            animator.Play("Victory");
+        }
+        if (!onGround) {
+            if (rigidBody.velocity.y < 0.0f) {
+                animator.Play("Fall");
+            } else {
+                animator.Play("Jump");
             }
         }
+        CheckGround();
     }
 
     void WallJumpUpdate() {
@@ -284,10 +363,42 @@ public class Player: MonoBehaviour {
                 }
             }
         }
+
+        animator.Play("Hurt");
+        CancelSpeed(1.0f);
+    }
+
+    void CrouchUpdate() {
+        HandleInput();
+        CheckGround();
+
+        isJumping = false;
+        isJumpCut = false;
+        isFalling = false;
+        canDoubleJump = true;
+        groundTimer = coyoteTime;
+        crouchTimer = coyoteTime;
+
+        if (!isJumping && Input.GetKeyDown("z")) {
+            Jump(currentJumpSpeed);
+            state = 1;
+            onGround = false;
+            groundTimer = 0.0f;
+            crouchTimer = 0.0f;
+        }
+
+        if (!onGround) {
+            state = 1;
+        }
+
+        animator.Play("Crouch_Animation");
     }
 
     public void Jump(float velocity) {
         float force = velocity - rigidBody.velocity.y;
+        if (crouchTimer > 0.0f) {
+            force += 1.5f;
+        }
         rigidBody.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         isJumping = true;
         isFalling = false;
@@ -297,7 +408,7 @@ public class Player: MonoBehaviour {
     }
 
     public void WallJump(float dir) {
-        Vector2 force = new Vector2(wallJumpForce.x, wallJumpForce.y);
+        Vector2 force = new Vector2(wallJumpForce.x, wallJumpForce.y * currentFactor);
 		force.x *= dir;
 		if (Mathf.Sign(rigidBody.velocity.x) != Mathf.Sign(force.x)) {
 			force.x -= rigidBody.velocity.x;
@@ -313,7 +424,7 @@ public class Player: MonoBehaviour {
     }
 
     public void Knockback(float factor) {
-        Vector2 force = new Vector2(knockbackForce.x * factor, knockbackForce.y * factor);
+        Vector2 force = new Vector2(knockbackForce.x * factor, knockbackForce.y * factor * currentFactor);
 		force.x *= -direction;
 		if (Mathf.Sign(rigidBody.velocity.x) != Mathf.Sign(force.x)) {
 			force.x -= rigidBody.velocity.x;
@@ -322,6 +433,7 @@ public class Player: MonoBehaviour {
 			force.y -= rigidBody.velocity.y;
         }
 		rigidBody.AddForce(force, ForceMode2D.Impulse);
+        state = 2;
     }
 
     bool CanWallJump() {
@@ -359,6 +471,13 @@ public class Player: MonoBehaviour {
 		rigidBody.AddForce(movement * Vector2.right, ForceMode2D.Force);
     }
 
+    void CancelSpeed(float lerpAmount) {
+        float targetSpeed = Mathf.Lerp(rigidBody.velocity.x, 0.0f, lerpAmount);
+        float speedDif = targetSpeed - rigidBody.velocity.x;
+		float movement = speedDif * brakeSpeed;
+		rigidBody.AddForce(movement * Vector2.right, ForceMode2D.Force);
+    }
+
     void CutJumpSpeed() {
         float force = rigidBody.velocity.y * 0.5f;
         rigidBody.AddForce(Vector2.down * force, ForceMode2D.Impulse);
@@ -376,7 +495,9 @@ public class Player: MonoBehaviour {
             direction = -1.0f;
         }
         
-        Run(1);
+        if (state != 5) {
+            Run(1);
+        }
 
         if (canShoot) {
             if (Input.GetKey("x")) { 
@@ -385,6 +506,14 @@ public class Player: MonoBehaviour {
                     LaunchProjectile();
                 }
             }
+        }
+
+        if (motion.x == 0.0f && Input.GetKey("down") && onGround && state == 0) {
+            state = 5;
+        }
+
+        if (!Input.GetKey("down") && onGround && state == 5) {
+            state = 0;
         }
     }
 
@@ -524,13 +653,16 @@ public class Player: MonoBehaviour {
             Kill();
         }
 
+        if (other.gameObject.CompareTag("Gem")) {
+            other.gameObject.SendMessage("OnPlayerContact", this);
+        }
+
         if (other.gameObject.CompareTag("Fruit")) {
             other.gameObject.SendMessage("OnPlayerContact", this);
         }
 
         if (other.gameObject.CompareTag("Star")) {
             other.gameObject.SendMessage("OnPlayerContact", this);
-            state = 4; // Win
         }
     }
 
@@ -551,15 +683,47 @@ public class Player: MonoBehaviour {
             other.gameObject.SendMessage("OnPlayerContact", this);
         }
 
+        if (other.gameObject.CompareTag("Gem")) {
+            other.gameObject.SendMessage("OnPlayerContact", this);
+        }
+
         if (other.gameObject.CompareTag("Star")) {
             other.gameObject.SendMessage("OnPlayerContact", this);
-            state = 4; // Win
         }
     }
 
     public void Upgrade(int type) {
         this.projectileType = type;
         SetInvisible();
+    }
+
+    public void OnFruitCollect(int type) {
+        fruitCount += 1;
+        fruitsRemaining -= 1;
+        if (fruitsRemaining == 0) {
+            switch (abilityToGain) {
+                case 0:
+                    projectileType = 1;
+                    break;
+                case 1:
+                    projectileType = 2;
+                    break;
+                case 2:
+                    canDoubleJump = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void OnGemCollect(int type) {
+        gemCount += 1;
+        Heal(1);
+    }
+
+    public void OnEnemyDestroy() {
+        enemyCount -= 1;
     }
 
     // Rendering
