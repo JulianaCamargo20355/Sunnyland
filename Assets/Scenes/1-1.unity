@@ -3191,6 +3191,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: powerUpType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.3938584
