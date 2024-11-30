@@ -8,4 +8,49 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/1-1.unity
+    guid: 297d4d22d2e7cde4fb90764594b8c37a
+  - enabled: 1
+    path: Assets/Scenes/1.2.unity
+    guid: 8b2224dac55c7474c9ae97b8afdb2720
+  - enabled: 1
+    path: Assets/Scenes/2.1.unity
+    guid: 57910d206ee5f704182fd4f3b360480d
+  - enabled: 1
+    path: Assets/Scenes/2.2.unity
+    guid: 2940fcad55057654f94b1cbf1666d170
+  - enabled: 1
+    path: Assets/Scenes/3.1.unity
+    guid: 498114abc05e7e84898e843a7c35f79c
+  - enabled: 1
+    path: Assets/Scenes/3.2.unity
+    guid: 4647d6555f49b7a42b1ac6ddf9c362d6
+  - enabled: 1
+    path: Assets/Scenes/4.1.unity
+    guid: 438d43dea5f74be44ae1e23faaec5212
+  - enabled: 1
+    path: Assets/Scenes/4.2.unity
+    guid: 3e3f9e44aa4a3de4f905df7251a6957c
+  - enabled: 1
+    path: Assets/Scenes/5.1.unity
+    guid: 07d578df4943b204e99de7911ce28497
+  - enabled: 1
+    path: Assets/Scenes/5.2.unity
+    guid: 22262f83e84a7db4f9e3ecfd564024e9
+  - enabled: 1
+    path: Assets/Scenes/ComoJogar.unity
+    guid: 5e09fdee02f774446b2ecf050eab5190
+  - enabled: 1
+    path: Assets/Scenes/Creditos.unity
+    guid: d410f70c10ddd6549acdd1c539ad61b5
+  - enabled: 1
+    path: Assets/Scenes/Derrota.unity
+    guid: 841e88a5a6db1e045ac124c6be7920c6
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: dfab70ae115e952419a3622dde8cdc7e
+  - enabled: 1
+    path: Assets/Scenes/Vitoria1.unity
+    guid: d8d7081d258b0104f90aaa8566b440f1
   m_configObjects: {}

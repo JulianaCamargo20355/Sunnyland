@@ -683,6 +683,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1238307131}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -740,6 +744,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1238307131}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -1670,6 +1678,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1238307131}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11
@@ -1961,6 +1973,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1238307131}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9
@@ -2019,6 +2035,7 @@ GameObject:
   - component: {fileID: 1097955652}
   - component: {fileID: 1097955656}
   - component: {fileID: 1097955655}
+  - component: {fileID: 1097955657}
   m_Layer: 0
   m_Name: star-1
   m_TagString: Star
@@ -2174,6 +2191,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.13, y: 0.13}
   m_EdgeRadius: 0
+--- !u!114 &1097955657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097955651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a418e3703d9184438f5ad18939c4c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: 1-1
 --- !u!1001 &1130412541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2186,6 +2216,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1238307131}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1
@@ -2243,6 +2277,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1238307131}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2
@@ -6619,6 +6657,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1238307131}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
