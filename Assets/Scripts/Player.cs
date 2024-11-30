@@ -544,6 +544,10 @@ public class Player: MonoBehaviour {
             onGround = false;
         }
 
+        if (rigidBody.velocity.y <= 0.0f) {
+            isJumping = false;
+        }
+
         if (!onGround && rigidBody.velocity.y < 0.0f) {
             isFalling = true;
             isJumping = false;
