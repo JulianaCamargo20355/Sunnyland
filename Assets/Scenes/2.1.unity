@@ -326,9 +326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1690df51ec7b8764f8588195b75dbe1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyPrefab: {fileID: 3254031392018606748, guid: 6a839e70754c83e43beb641b12caf37d, type: 3}
   powerUpType: 0
   healPlayer: 1
+  player: {fileID: 0}
 --- !u!61 &409706346
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1971,6 +1971,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyPrefab: {fileID: 3254031392018606748, guid: 6a839e70754c83e43beb641b12caf37d, type: 3}
+  rhythm: 1
+  height: 0.7
 --- !u!61 &689951964
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2067,6 +2069,10 @@ PrefabInstance:
     - target: {fileID: 5343125520604122567, guid: 1138beb8c2ae81640955eea91cab33d3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343125520604122586, guid: 1138beb8c2ae81640955eea91cab33d3, type: 3}
+      propertyPath: abilityToGain
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5343125520604122586, guid: 1138beb8c2ae81640955eea91cab33d3, type: 3}
       propertyPath: groundLayer.m_Bits
@@ -2964,9 +2970,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1690df51ec7b8764f8588195b75dbe1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyPrefab: {fileID: 3254031392018606748, guid: 6a839e70754c83e43beb641b12caf37d, type: 3}
   powerUpType: 0
   healPlayer: 1
+  player: {fileID: 0}
 --- !u!61 &1440699969
 BoxCollider2D:
   m_ObjectHideFlags: 0

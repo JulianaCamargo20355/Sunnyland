@@ -101,18 +101,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 0}
-  bulletSpeed: 15
-  plasmaSpeed: 17
-  defaultColor: {r: 1, g: 0, b: 0, a: 1}
-  dreamColor: {r: 1, g: 0, b: 0.9026203, a: 1}
-  plasmaColor: {r: 0, g: 1, b: 0.42083812, a: 1}
+  bulletSpeed: 10
+  colors:
+  - {r: 0.79622644, g: 0.67153436, b: 0.67153436, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.99390316, b: 1, a: 1}
   bulletType: 0
   direction: 0
   bulletDirection: 0
-  dreamHeight: 3
-  defaultDamageAmount: 1
-  dreamDamageAmount: 2
-  plasmaDamageAmount: 3
+  dreamHeight: 7.5
+  launchSpeed: 4.5
 --- !u!61 &4058965818000627610
 BoxCollider2D:
   m_ObjectHideFlags: 0

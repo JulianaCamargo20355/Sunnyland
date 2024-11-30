@@ -189,6 +189,11 @@ MonoBehaviour:
   currentFactor: 1
   isJumping: 0
   onGround: 1
+  projectileType: 0
+  hasCrouch: 1
+  hasDoubleJump: 0
+  hasWallJump: 0
+  abilityToGain: 0
   groundCheckPoint: {fileID: 5343125521321155645}
   groundCheckSize: {x: 0.42, y: 0.11}
   groundLayer:
@@ -200,16 +205,14 @@ MonoBehaviour:
   winTimer: 2
   health: 3
   maxHealth: 3
-  projectileType: 0
   canBeHurt: 1
-  hasDoubleJump: 1
-  hasWallJump: 1
   projectilePrefab: {fileID: 8868399157209923230, guid: 13eb7342d1eaa6c41a0ea30d70d9a452, type: 3}
   fruitCount: 0
   gemCount: 0
   starCount: 0
   enemyCount: 0
   fruitsRemaining: 0
+  enemiesDestroyed: 0
   star: {fileID: 0}
   hearts: []
   deathParticleSystem: {fileID: 0}

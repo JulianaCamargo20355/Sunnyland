@@ -54,9 +54,9 @@ public class Player: MonoBehaviour {
     // Abilities
     public int projectileType = 1;
     public bool hasCrouch = true;
-    public bool hasDoubleJump = true;
-    public bool hasWallJump = true;
-    public int abilityToGain;
+    public bool hasDoubleJump = false;
+    public bool hasWallJump = false;
+    public int abilityToGain = 0;
  
     // Collision
     [SerializeField] private Transform groundCheckPoint;
@@ -87,6 +87,7 @@ public class Player: MonoBehaviour {
     public int starCount;
     public int enemyCount;
     public int fruitsRemaining;
+    public int enemiesDestroyed;
     public Star star;
 
     // Rendering
@@ -99,6 +100,18 @@ public class Player: MonoBehaviour {
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        if (abilityToGain > 0) {
+            projectileType = abilityToGain - 1;
+            if (abilityToGain > 1) {
+                hasDoubleJump = true;
+            }
+            if (abilityToGain > 0) {
+                hasWallJump = true;
+            }
+        } else {
+            hasDoubleJump = false;
+            hasWallJump = false;
+        }
     }
 
     void Update() {
@@ -314,7 +327,7 @@ public class Player: MonoBehaviour {
 
     void WinUpdate() {
         rigidBody.velocity = new Vector2(0.0f, rigidBody.velocity.y);
-        if (onGround && winTimer > 0.0f) {
+        if (onGround && rigidBody.velocity.y <= 0.0f && winTimer > 0.0f) {
             winTimer -= Time.deltaTime;
             if (winTimer <= 0.0f) {
                 // Next scene
@@ -589,27 +602,50 @@ public class Player: MonoBehaviour {
     void LaunchProjectile() {
         Projectile first = null;
         Projectile second = null;
+        Projectile third = null;
         switch (this.projectileType) {
-            case 0: // Default
+            case 0:
                 first = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-                first.SetDefault();
+                first.SetBulletType(projectileType);
                 first.bulletDirection = direction;
                 break;   
-            case 1: // Dream 
-                first = Instantiate(projectilePrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
-                second = Instantiate(projectilePrefab, transform.position + Vector3.down * 0.5f, Quaternion.identity);
-                first.SetDream();
+            case 1: 
+                first = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+                first.SetBulletType(projectileType);
+                first.SetFloatDirection(1.0f);
                 first.bulletDirection = direction;
-                second.SetDream(); 
+
+                second = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+                second.SetBulletType(projectileType);
+                second.SetFloatDirection(-1.0f);
                 second.bulletDirection = direction; 
                 break;   
-            case 2: // Plasma
+            case 2:
                 first = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-                second = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-                first.SetPlasma(1.0f); // Inverted direction
+                first.SetFloatDirection(1.0f);
+                first.SetBulletType(projectileType);
                 first.bulletDirection = direction;
-                second.SetPlasma(-1.0f);
+
+                second = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+                second.SetFloatDirection(-1.0f);
+                second.SetBulletType(projectileType);
                 second.bulletDirection = direction;
+                break;
+            case 3:
+                first = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+                first.SetFloatDirection(1.0f);
+                first.SetBulletType(projectileType);
+                first.bulletDirection = direction;
+
+                second = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+                second.SetFloatDirection(0.0f);
+                second.SetBulletType(projectileType);
+                second.bulletDirection = direction;
+
+                third = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+                third.SetFloatDirection(-1.0f);
+                third.SetBulletType(projectileType);
+                third.bulletDirection = direction;
                 break;
             default:
                 break;  
@@ -703,17 +739,32 @@ public class Player: MonoBehaviour {
         if (fruitsRemaining == 0) {
             switch (abilityToGain) {
                 case 0:
-                    projectileType = 1;
+                    hasWallJump = true;
+                    hasDoubleJump = false;
                     break;
                 case 1:
-                    projectileType = 2;
+                    hasWallJump = true;
+                    hasDoubleJump = true;
                     break;
                 case 2:
-                    canDoubleJump = true;
+                    hasWallJump = true;
+                    hasDoubleJump = true;
+                    projectileType = 1;
+                    break;
+                case 3:
+                    hasWallJump = true;
+                    hasDoubleJump = true;
+                    projectileType = 2;
+                    break;
+                case 4:
+                    hasWallJump = true;
+                    hasDoubleJump = true;
+                    projectileType = 3;
                     break;
                 default:
                     break;
             }
+            abilityToGain += 1;
         }
     }
 
@@ -724,6 +775,7 @@ public class Player: MonoBehaviour {
 
     public void OnEnemyDestroy() {
         enemyCount -= 1;
+        enemiesDestroyed += 1;
     }
 
     // Rendering

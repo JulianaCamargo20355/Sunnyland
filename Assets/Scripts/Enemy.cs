@@ -34,7 +34,7 @@ public class Enemy: MonoBehaviour {
     private int blinkType = 0;
     public bool canBeHurt = true;
     public float blinkCycleSeconds = 0.07f;
-    public float maxInvisibleTime = 1.0f;
+    public float maxInvisibleTime = 0.6f;
     public float gemRng = 0.4f;
 
     // Rendering
