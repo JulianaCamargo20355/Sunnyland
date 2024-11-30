@@ -1666,8 +1666,8 @@ MonoBehaviour:
   state: 0
   health: 32
   maxHealth: 32
-  horizontalSpeed: 8.5
-  accelerationRate: 6
+  horizontalSpeed: 7.5
+  accelerationRate: 3.5
   blinkCycleSeconds: 0.07
   maxInvisibleTime: 1
   direction: -1

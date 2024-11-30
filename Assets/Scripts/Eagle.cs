@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class Eagle: MonoBehaviour {
     public float startPosition;
     public float range;
+    public float width = 2f;
     public float fallSpeed = 12f;
     public float rate = 8.0f;
 
     void Start() {
         startPosition = transform.position.x;
-        range = 2.25f + Random.value;
+        range = width + Random.value;
         Destroy(this.gameObject, 20);
     }
 

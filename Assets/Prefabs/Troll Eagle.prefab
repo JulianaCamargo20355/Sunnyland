@@ -167,4 +167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPosition: 0
   range: 0
-  fallSpeed: 12
+  width: 2
+  fallSpeed: 7
+  rate: 2

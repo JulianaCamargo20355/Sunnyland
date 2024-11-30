@@ -58,19 +58,18 @@ public class Troll: MonoBehaviour {
         float animationTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
         animationTime = animationTime % 1;
 
-        if (state != 2 && animationTime >= 14.0f / 19.0f) {
-            state = 2; // Attack
-            shaker.SendMessage("Shake", 1.2f);
-            if (Random.value < 0.5f) {
-                attacker.SendMessage("AttackPlayer");
+        if (rigidBody.velocity.y == 0.0f) {
+            if (state != 2 && animationTime >= 14.0f / 19.0f) {
+                state = 2; // Attack
+                shaker.SendMessage("Shake", 1.2f);
+                if (Random.value < 0.5f) {
+                    attacker.SendMessage("AttackPlayer");
+                }
+            } else if (state != 1 && animationTime >= 9.0f / 19.0f) {
+                state = 1;
+            } else if (state != 0) {
+                state = 0;
             }
-            if (player.onGround) {
-                player.Hurt(3, true);
-            }
-        } else if (state != 1 && animationTime >= 9.0f / 19.0f) {
-            state = 1;
-        } else if (state != 0) {
-            state = 0;
         }
 
         dashTimer += Time.deltaTime;
@@ -114,7 +113,7 @@ public class Troll: MonoBehaviour {
     }
 
     void RunUpdate() {
-        Run(1.0f, 1.0f);
+        Run(2.0f, 1.0f);
     }
 
     void AttackUpdate() {

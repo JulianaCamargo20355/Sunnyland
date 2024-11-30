@@ -1543,18 +1543,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  player: {fileID: 1714560543}
-  horizontalSpeed: 27
-  aggressiveForce: {x: 6, y: 1.5}
-  accelerationRate: 5
   health: 32
   maxHealth: 32
+  horizontalSpeed: 24
+  accelerationRate: 5
   blinkCycleSeconds: 0.07
   maxInvisibleTime: 1
+  aggressiveForce: {x: 30, y: 2}
+  generalTimer: 0
   direction: -1
+  player: {fileID: 1714560543}
   destroyFx: {fileID: 843527598200146930, guid: 3f8a50f82013340498e083f937da1f41, type: 3}
   shaker: {fileID: 1404723553}
-  generalTimer: 0
   animator: {fileID: 1728700299}
 --- !u!1 &1805037073
 GameObject:
