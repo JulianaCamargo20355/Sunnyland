@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Fruit: MonoBehaviour {
     public int powerUpType;
-    public bool healPlayer = false;
     public Player player;
 
     void Start() {
@@ -14,12 +13,6 @@ public class Fruit: MonoBehaviour {
 
     void OnPlayerContact(Player player) {
         player.OnFruitCollect(powerUpType);
-        if (healPlayer) {
-            player.Heal(1);
-        }
-        if (powerUpType != 0) {
-            player.Upgrade(powerUpType);
-        }
         Destroy(this.gameObject);
     }
 }

@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Ogre: MonoBehaviour {
+public class Troll: MonoBehaviour {
     public int state = 0;
 
     public int health = 32;
     public int maxHealth = 32;
-    public float horizontalSpeed = 8.5f;
-    public float accelerationRate = 2.0f;
+    public float horizontalSpeed = 10.5f;
+    public float accelerationRate = 4.0f;
     public float blinkCycleSeconds = 0.07f;
     public float maxInvisibleTime = 1.0f;
+    public Vector2 aggressiveForce = new Vector2(10.0f, 4.0f);
 
     public float direction = -1.0f;
     private float invisibilityTimer;
@@ -19,6 +20,8 @@ public class Ogre: MonoBehaviour {
     [SerializeField] private Player player;
     [SerializeField] private GameObject destroyFx;
     [SerializeField] private GameObject shaker;
+    [SerializeField] private TrollAttacker attacker;
+    private float dashTimer = 0.0f;
     
     private SpriteRenderer spriteRenderer;
     public Animator animator;
@@ -55,16 +58,25 @@ public class Ogre: MonoBehaviour {
         float animationTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
         animationTime = animationTime % 1;
 
-        if (state != 2 && animationTime >= 13.0f / 15.0f) {
+        if (state != 2 && animationTime >= 14.0f / 19.0f) {
             state = 2; // Attack
             shaker.SendMessage("Shake", 1.2f);
-            if (player.onGround) {
-                player.Hurt(2, true);
+            if (Random.value < 0.5f) {
+                attacker.SendMessage("AttackPlayer");
             }
-        } else if (state != 1 && animationTime >= 8.0f / 25.0f) {
+            if (player.onGround) {
+                player.Hurt(3, true);
+            }
+        } else if (state != 1 && animationTime >= 9.0f / 19.0f) {
             state = 1;
         } else if (state != 0) {
             state = 0;
+        }
+
+        dashTimer += Time.deltaTime;
+        if (dashTimer >= 5.0f) {
+            dashTimer = 0.0f;
+            Jump();
         }
 
         if (invisibilityTimer > 0.0f) {
@@ -83,6 +95,18 @@ public class Ogre: MonoBehaviour {
         float speedDif = targetSpeed - rigidBody.velocity.x;
 		float movement = speedDif * accelerationRate;
 		rigidBody.AddForce(movement * Vector2.right, ForceMode2D.Force);
+    }
+
+    void Jump() {
+        Vector2 force = new Vector2(aggressiveForce.x, aggressiveForce.y);
+        force.x *= direction; // Towards player
+		if (Mathf.Sign(rigidBody.velocity.x) != Mathf.Sign(force.x)) {
+			force.x -= rigidBody.velocity.x;
+        }
+		if (rigidBody.velocity.y < 0) {
+			force.y -= rigidBody.velocity.y;
+        }
+		rigidBody.AddForce(force, ForceMode2D.Impulse);
     }
 
     void StandUpdate() {

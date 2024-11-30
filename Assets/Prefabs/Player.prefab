@@ -203,8 +203,8 @@ MonoBehaviour:
   backWallCheckPoint: {fileID: 5343125520723359084}
   wallCheckSize: {x: 0.1, y: 0.4}
   winTimer: 2
-  health: 3
-  maxHealth: 3
+  health: 32
+  maxHealth: 32
   canBeHurt: 1
   projectilePrefab: {fileID: 8868399157209923230, guid: 13eb7342d1eaa6c41a0ea30d70d9a452, type: 3}
   fruitCount: 0
