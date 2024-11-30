@@ -77,8 +77,8 @@ public class Player: MonoBehaviour {
     private float crouchTimer;
 
     // Player status
-    public int health = 3;
-    public int maxHealth = 3;
+    public int health = 32;
+    public int maxHealth = 32;
     private int blinkType = 0;
     public bool canBeHurt = true;
     public Projectile projectilePrefab;
@@ -112,6 +112,7 @@ public class Player: MonoBehaviour {
             hasDoubleJump = false;
             hasWallJump = false;
         }
+        UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.PlayerHealth, health / (float) maxHealth);
     }
 
     void Update() {
@@ -491,10 +492,12 @@ public class Player: MonoBehaviour {
 		rigidBody.AddForce(movement * Vector2.right, ForceMode2D.Force);
     }
 
-    void CutJumpSpeed() {
-        float force = rigidBody.velocity.y * 0.5f;
-        rigidBody.AddForce(Vector2.down * force, ForceMode2D.Impulse);
-        isJumpCut = true;
+    public void CutJumpSpeed() {
+        if (rigidBody.velocity.y > 0.0f) {
+            float force = rigidBody.velocity.y * 0.5f;
+            rigidBody.AddForce(Vector2.down * force, ForceMode2D.Impulse);
+            isJumpCut = true;
+        }
     }
 
     void HandleInput() {
@@ -576,8 +579,10 @@ public class Player: MonoBehaviour {
             return;        
         }
         health -= damageAmount;
+        UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.PlayerHealth, health / (float) maxHealth);
         if (health <= 0) {
             Kill();
+            UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.PlayerHealth, 0.0f);
             return;
         }
         if (!stronger) {
@@ -678,11 +683,11 @@ public class Player: MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Hazard")) {
-            Hurt(1);
+            Hurt(8);
         }
 
         if (other.gameObject.CompareTag("Enemy")) {
-            Hurt(1);
+            Hurt(8);
         }
 
         if (other.gameObject.CompareTag("InstantDeath")) {
@@ -704,11 +709,11 @@ public class Player: MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Hazard")) {
-            Hurt(1);
+            Hurt(8);
         }
 
         if (other.gameObject.CompareTag("Enemy")) {
-            Hurt(1);
+            Hurt(8);
         }
 
         if (other.gameObject.CompareTag("InstantDeath")) {
@@ -770,7 +775,7 @@ public class Player: MonoBehaviour {
 
     public void OnGemCollect(int type) {
         gemCount += 1;
-        Heal(1);
+        Heal(4);
     }
 
     public void OnEnemyDestroy() {

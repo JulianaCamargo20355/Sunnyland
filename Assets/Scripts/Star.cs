@@ -35,6 +35,7 @@ public class Star: MonoBehaviour {
         if (active) {
             player.Heal(10);
             player.starCount += 1;
+            player.CutJumpSpeed();
             Instantiate(destroyPrefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
             player.state = 4;
