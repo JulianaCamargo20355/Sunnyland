@@ -240,6 +240,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 330237360}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.75
@@ -297,6 +301,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 330237360}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5
@@ -510,6 +518,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &330237360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5343125520604122586, guid: 1138beb8c2ae81640955eea91cab33d3, type: 3}
+  m_PrefabInstance: {fileID: 7242395}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bc88a94190630b40a863348237a5298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &558319038
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,7 +656,7 @@ MonoBehaviour:
   frogMiniJumpSpeed: 0
   frogBigJumpSpeed: 0
   frogTimeOnGround: 0
-  player: {fileID: 0}
+  player: {fileID: 330237360}
   direction: 1
   groundCheckSize: {x: 0.13, y: 0.2}
   groundLayer:
@@ -738,6 +757,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 330237360}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.5
@@ -795,6 +818,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 330237360}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.75
@@ -1097,7 +1124,7 @@ MonoBehaviour:
   frogMiniJumpSpeed: 0
   frogBigJumpSpeed: 0
   frogTimeOnGround: 0
-  player: {fileID: 0}
+  player: {fileID: 330237360}
   direction: 1
   groundCheckSize: {x: 0.13, y: 0.2}
   groundLayer:
@@ -1112,7 +1139,7 @@ MonoBehaviour:
   blinkCycleSeconds: 0.07
   maxInvisibleTime: 1
   gemRng: 0.4
-  destroyFx: {fileID: 0}
+  destroyFx: {fileID: 843527598200146930, guid: 09cba043c6404ae4f8968cafdd8e4834, type: 3}
   gem: {fileID: 0}
 --- !u!50 &796959639
 Rigidbody2D:
@@ -3192,6 +3219,10 @@ PrefabInstance:
       value: Cherry
       objectReference: {fileID: 0}
     - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 330237360}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: powerUpType
       value: 1
       objectReference: {fileID: 0}
@@ -3535,7 +3566,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: e2963cab8e11d2c40a8f970d2d6b307c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3679,6 +3710,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 330237360}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.25
@@ -3736,6 +3771,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 330237360}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.75
@@ -3923,6 +3962,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5040221029690052082, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 330237360}
     - target: {fileID: 6183259967293182702, guid: 233da816c949f5d4091b8b9796d1e407, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.75
