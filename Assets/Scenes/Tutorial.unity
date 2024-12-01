@@ -663,7 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: -10}
   smoothTime: 0.25
-  levelSize: {x: 16, y: 9}
+  levelSize: {x: 16, y: 10}
   cameraRange: 3.4
   scrollRange: 3.4
   cameraPos: {fileID: 0}
@@ -7065,6 +7065,14 @@ PrefabInstance:
     - target: {fileID: 1050757813329508940, guid: 47982d09b583c0c41add99fccbef4016, type: 3}
       propertyPath: m_Name
       value: HUDCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645826647716468179, guid: 47982d09b583c0c41add99fccbef4016, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 848
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645826647716468179, guid: 47982d09b583c0c41add99fccbef4016, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 480
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
