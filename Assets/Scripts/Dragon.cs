@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Dragon : MonoBehaviour
 {
-    public int state = 0;
+    public int state = 1;
 
     // Boss data
     public int health = 32;
@@ -16,7 +16,9 @@ public class Dragon : MonoBehaviour
     public Vector2 aggressiveForce = new Vector2(10.0f, 4.0f);
     public float areaWidth = 6.0f;
     public float fireRate = 2f;
+    public float shootRate = 0.45f;
     public float changeRate = 0.7f;
+    private int shootCount = 0;
 
     // Timers
     private float invisibilityTimer;
@@ -70,7 +72,7 @@ public class Dragon : MonoBehaviour
             timer = changeRate * Random.value;
             state = Random.Range(0, 3);
             if (state == 2) {
-                timer = 7.0f * changeRate * Random.value;
+                timer = 7.5f * changeRate * Random.value;
             }
         } 
 
@@ -94,21 +96,26 @@ public class Dragon : MonoBehaviour
         animator.Play("DragonAttack");
         fireTimer -= Time.deltaTime;
         if (fireTimer <= 0.0f) {
-            fireTimer = fireRate / 5.0f;
+            fireTimer = shootRate;
             GameObject fireball = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
             fireball.SendMessage("SetPlayer", player);
             shaker.SendMessage("Shake", 1.2f);
+            shootCount += 1;
+            if (shootCount > 7) {
+                shootCount = 0;
+                state = 1;
+            }
         }
         Run(1.0f, 0.0f);
     }
 
     void RunState() {
         if (transform.position.x < targetPosition.x) {
-            direction = 1.0f;
-            animator.Play("DragonWalk2");
-        } else {
             direction = -1.0f;
             animator.Play("DragonWalk");
+        } else {
+            direction = 1.0f;
+            animator.Play("DragonWalk2");
         }
 
         Run(1.0f, 1.0f);

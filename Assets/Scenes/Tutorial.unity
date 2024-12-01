@@ -2031,7 +2031,6 @@ GameObject:
   - component: {fileID: 1097955652}
   - component: {fileID: 1097955656}
   - component: {fileID: 1097955655}
-  - component: {fileID: 1097955657}
   m_Layer: 0
   m_Name: star-1
   m_TagString: Star
@@ -2187,19 +2186,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.13, y: 0.13}
   m_EdgeRadius: 0
---- !u!114 &1097955657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1097955651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a418e3703d9184438f5ad18939c4c44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: 1-1
 --- !u!1001 &1130412541
 PrefabInstance:
   m_ObjectHideFlags: 0

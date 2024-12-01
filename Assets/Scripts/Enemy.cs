@@ -43,10 +43,12 @@ public class Enemy: MonoBehaviour {
     private SpriteRenderer spriteRenderer;
     [SerializeField] private GameObject destroyFx;
     [SerializeField] private Gem gem;
+    private Animator animator;
 
     void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         switch (enemyType) {
             case 0: // Frog
@@ -145,11 +147,19 @@ public class Enemy: MonoBehaviour {
 
     void StartRabbit() {
         InvokeRepeating("RabbitJump", 0.0f, 1.5f);
+        direction = Random.value < 0.5 ? -1.0f : 1.0f;
     }
 
     void UpdateRabbit() {
         if (rigidBody.velocity.y == 0.0f && Physics2D.OverlapBox(transform.position, groundCheckSize, 0, groundLayer)) {
             rigidBody.velocity = new Vector2(0.0f, 0.0f);
+            animator.Play("RabbitIdle");
+        } else {
+            if (rigidBody.velocity.y > 0.0f) {
+                animator.Play("RabbitJump");
+            } else {
+                animator.Play("RabbitFall");
+            }
         }
     }
 
@@ -159,7 +169,7 @@ public class Enemy: MonoBehaviour {
         } else {
             direction = 1.0f;
         }
-        
+
         if (rigidBody.velocity.y == 0.0f && Physics2D.OverlapBox(transform.position, groundCheckSize, 0, groundLayer)) {
             float forceX = rabbitForce * direction;
             float forceY = rabbitForce;

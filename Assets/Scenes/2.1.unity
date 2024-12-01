@@ -1542,6 +1542,7 @@ GameObject:
   - component: {fileID: 509147209}
   - component: {fileID: 509147208}
   - component: {fileID: 509147212}
+  - component: {fileID: 509147213}
   m_Layer: 0
   m_Name: bunny1
   m_TagString: Enemy
@@ -1604,7 +1605,7 @@ Animator:
   m_GameObject: {fileID: 509147207}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8a6f6818f91745b4698d8e2de4e21564, type: 2}
+  m_Controller: {fileID: 9100000, guid: c7a6d44a04ebdb341952998266fa5861, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1719,6 +1720,33 @@ MonoBehaviour:
   gemRng: 0.4
   destroyFx: {fileID: 843527598200146930, guid: 09cba043c6404ae4f8968cafdd8e4834, type: 3}
   gem: {fileID: 3907500552645906889, guid: 7228e6775533487439fd7f22a7942da9, type: 3}
+--- !u!50 &509147213
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509147207}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &549610354
 GameObject:
   m_ObjectHideFlags: 0
@@ -2107,6 +2135,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5343125520604122586, guid: 1138beb8c2ae81640955eea91cab33d3, type: 3}
+      propertyPath: star
+      value: 
+      objectReference: {fileID: 689951963}
     - target: {fileID: 5343125520604122586, guid: 1138beb8c2ae81640955eea91cab33d3, type: 3}
       propertyPath: abilityToGain
       value: 2
@@ -3351,6 +3383,7 @@ GameObject:
   - component: {fileID: 2082901205}
   - component: {fileID: 2082901204}
   - component: {fileID: 2082901208}
+  - component: {fileID: 2082901209}
   m_Layer: 0
   m_Name: bunny1 (2)
   m_TagString: Enemy
@@ -3528,6 +3561,33 @@ MonoBehaviour:
   gemRng: 0.4
   destroyFx: {fileID: 843527598200146930, guid: 09cba043c6404ae4f8968cafdd8e4834, type: 3}
   gem: {fileID: 3907500552645906889, guid: 7228e6775533487439fd7f22a7942da9, type: 3}
+--- !u!50 &2082901209
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082901203}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &2094876362
 GameObject:
   m_ObjectHideFlags: 0
@@ -3541,6 +3601,7 @@ GameObject:
   - component: {fileID: 2094876364}
   - component: {fileID: 2094876363}
   - component: {fileID: 2094876367}
+  - component: {fileID: 2094876368}
   m_Layer: 0
   m_Name: bunny1 (1)
   m_TagString: Enemy
@@ -3718,6 +3779,33 @@ MonoBehaviour:
   gemRng: 0.4
   destroyFx: {fileID: 843527598200146930, guid: 09cba043c6404ae4f8968cafdd8e4834, type: 3}
   gem: {fileID: 3907500552645906889, guid: 7228e6775533487439fd7f22a7942da9, type: 3}
+--- !u!50 &2094876368
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094876362}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

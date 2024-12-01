@@ -122,6 +122,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &372566803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 372566805}
+  - component: {fileID: 372566804}
+  m_Layer: 0
+  m_Name: Shaker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &372566804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372566803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8fb35a93a26c9a499e2b23dfd7ff217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0
+  range: 0
+  maxRange: 2.5
+--- !u!4 &372566805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372566803}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &699584814
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,12 +667,12 @@ MonoBehaviour:
   maxInvisibleTime: 0.7
   aggressiveForce: {x: 10, y: 4}
   areaWidth: 12
-  fireRate: 2
+  fireRate: 1
   changeRate: 0.55
   direction: 1
   player: {fileID: 1593989111}
   destroyFx: {fileID: 843527598200146930, guid: 3f8a50f82013340498e083f937da1f41, type: 3}
-  shaker: {fileID: 0}
+  shaker: {fileID: 372566803}
   animator: {fileID: 0}
   fireballPrefab: {fileID: 7409022838748360808, guid: de6eaf57c95508c4db0068507baa13a7, type: 3}
   firePoint: {fileID: 1137569503}
@@ -1586,3 +1633,4 @@ SceneRoots:
   - {fileID: 1300562131}
   - {fileID: 1205987391}
   - {fileID: 1077070143}
+  - {fileID: 372566805}

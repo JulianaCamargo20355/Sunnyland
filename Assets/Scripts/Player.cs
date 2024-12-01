@@ -93,8 +93,6 @@ public class Player: MonoBehaviour {
 
     // Rendering
     private SpriteRenderer spriteRenderer;
-    public Image[] hearts;
-    public ParticleSystem deathParticleSystem;
     private Animator animator;
 
     void Start() {
@@ -377,23 +375,18 @@ public class Player: MonoBehaviour {
     }
 
     void HurtUpdate() {
-        if (invisibilityTimer > 0.0f) {
+        if (invisibilityTimer > maxInvisibleTime / 2.0f) {
             invisibilityTimer -= Time.deltaTime;
-            if (invisibilityTimer <= 0.0f) {
-                // Refresh status 
-                invisibilityTimer = 0;
-                blinkType = 0;
-                CheckGround();
-                if (onGround) {
-                    state = 0;
-                } else {
-                    state = 1;
-                }
+            animator.Play("Hurt");
+            CancelSpeed(1.0f);
+        } else {
+            CheckGround();
+            if (onGround) {
+                state = 0;
+            } else {
+                state = 1;
             }
         }
-
-        animator.Play("Hurt");
-        CancelSpeed(1.0f);
     }
 
     void CrouchUpdate() {
@@ -612,7 +605,7 @@ public class Player: MonoBehaviour {
             return;
         }
         if (!stronger) {
-            Knockback(1.0f);
+            Knockback(0.5f);
         } else {
             Knockback(2.0f);
         }
@@ -621,13 +614,7 @@ public class Player: MonoBehaviour {
 
     public void Kill() {
         health = 0;
-        deathParticleSystem.gameObject.SetActive(true);
-        deathParticleSystem.transform.position = new Vector3(transform.position.x, transform.position.y, -0.5f);
-        deathParticleSystem.Play();
-        this.gameObject.SetActive(false);
-        for (int i = 0; i < hearts.Length; ++i) {
-            hearts[i].enabled = false;            
-        }   
+        this.gameObject.SetActive(false); 
     }
 
     void LaunchProjectile() {

@@ -198,7 +198,7 @@ MonoBehaviour:
   groundCheckSize: {x: 0.42, y: 0.11}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 9
   frontWallCheckPoint: {fileID: 5343125522352474272}
   backWallCheckPoint: {fileID: 5343125520723359084}
   wallCheckSize: {x: 0.1, y: 0.4}
@@ -214,8 +214,7 @@ MonoBehaviour:
   fruitsRemaining: 0
   enemiesDestroyed: 0
   star: {fileID: 0}
-  hearts: []
-  deathParticleSystem: {fileID: 0}
+  higherInvisibilityTime: 0
 --- !u!50 &5343125520604122565
 Rigidbody2D:
   serializedVersion: 4

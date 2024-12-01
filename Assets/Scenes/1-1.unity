@@ -661,7 +661,6 @@ MonoBehaviour:
   frogBigJumpSpeed: 0
   frogTimeOnGround: 0
   player: {fileID: 330237360}
-  plantProjectile: {fileID: 0}
   direction: 1
   groundCheckSize: {x: 0.13, y: 0.2}
   groundLayer:
@@ -677,7 +676,7 @@ MonoBehaviour:
   maxInvisibleTime: 1
   gemRng: 0.4
   destroyFx: {fileID: 843527598200146930, guid: 09cba043c6404ae4f8968cafdd8e4834, type: 3}
-  gem: {fileID: 0}
+  gem: {fileID: 3907500552645906889, guid: 7228e6775533487439fd7f22a7942da9, type: 3}
 --- !u!50 &558319043
 Rigidbody2D:
   serializedVersion: 4
@@ -1130,7 +1129,6 @@ MonoBehaviour:
   frogBigJumpSpeed: 0
   frogTimeOnGround: 0
   player: {fileID: 330237360}
-  plantProjectile: {fileID: 0}
   direction: 1
   groundCheckSize: {x: 0.13, y: 0.2}
   groundLayer:
@@ -1146,7 +1144,7 @@ MonoBehaviour:
   maxInvisibleTime: 1
   gemRng: 0.4
   destroyFx: {fileID: 843527598200146930, guid: 09cba043c6404ae4f8968cafdd8e4834, type: 3}
-  gem: {fileID: 0}
+  gem: {fileID: 3907500552645906889, guid: 7228e6775533487439fd7f22a7942da9, type: 3}
 --- !u!50 &796959639
 Rigidbody2D:
   serializedVersion: 4
