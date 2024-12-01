@@ -633,7 +633,8 @@ public class Player: MonoBehaviour {
 
     public void Kill() {
         health = 0;
-        this.gameObject.SetActive(false); 
+        this.gameObject.SetActive(false);
+        SceneManager.LoadScene("Derrota");
     }
 
     void LaunchProjectile() {
