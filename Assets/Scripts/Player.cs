@@ -121,7 +121,9 @@ public class Player: MonoBehaviour {
             hasDoubleJump = false;
             hasWallJump = false;
         }
-        UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.PlayerHealth, health / (float) maxHealth);
+        if (UIEnergyBars.Instance != null) {
+            UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.PlayerHealth, health / (float) maxHealth);
+        }
     }
 
     void Update() {

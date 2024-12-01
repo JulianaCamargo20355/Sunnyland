@@ -1606,8 +1606,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  health: 64
-  maxHealth: 64
+  health: 32
+  maxHealth: 32
   horizontalSpeed: 16.5
   accelerationRate: 3
   blinkCycleSeconds: 0.07

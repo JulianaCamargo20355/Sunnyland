@@ -100,6 +100,8 @@ public class Enemy: MonoBehaviour {
                 invisibilityTimer = 0.0f;
                 blinkType = 0;
             }
+        } else {
+            blinkType = 0;
         }
         UpdateSprite();
     }
