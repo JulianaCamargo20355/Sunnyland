@@ -89,6 +89,7 @@ public class Player: MonoBehaviour {
     public int fruitsRemaining;
     public int enemiesDestroyed;
     public Star star;
+    public bool higherInvisibilityTime = false;
 
     // Rendering
     private SpriteRenderer spriteRenderer;
@@ -102,11 +103,17 @@ public class Player: MonoBehaviour {
         animator = GetComponent<Animator>();
         if (abilityToGain > 0) {
             projectileType = abilityToGain - 1;
+            if (projectileType > 3) {
+                projectileType = 3;
+            }
             if (abilityToGain > 1) {
                 hasDoubleJump = true;
             }
             if (abilityToGain > 0) {
                 hasWallJump = true;
+            }
+            if (abilityToGain == 6) {
+                higherInvisibilityTime = true;
             }
         } else {
             hasDoubleJump = false;
@@ -146,7 +153,8 @@ public class Player: MonoBehaviour {
         }
 
         if (Input.GetKeyDown("w")) {
-            onWater = true;
+            //onWater = true;
+            state = 4;
         }
 
         if (Input.GetKeyDown("k")) {
@@ -163,6 +171,12 @@ public class Player: MonoBehaviour {
             currentJumpSpeed = jumpSpeed;
             currentDoubleJumpSpeed = doubleJumpSpeed;
             currentFactor = 1.0f;
+        }
+
+        if (isJumping && rigidBody.velocity.y < 0.0f) {
+            isFalling = true;
+            isJumping = false;
+            isJumpCut = false;
         }
 
         UpdateTimers();
@@ -446,6 +460,9 @@ public class Player: MonoBehaviour {
 		if (rigidBody.velocity.y < 0) {
 			force.y -= rigidBody.velocity.y;
         }
+        if (rigidBody.velocity.y > 0) {
+			force.y -= rigidBody.velocity.y;
+        }
 		rigidBody.AddForce(force, ForceMode2D.Impulse);
         state = 2;
     }
@@ -518,7 +535,10 @@ public class Player: MonoBehaviour {
         if (canShoot) {
             if (Input.GetKey("x")) { 
                 if (launchTimer <= 0.0f) {
-                    launchTimer = timeBetweenBullets;            
+                    launchTimer = timeBetweenBullets;     
+                    if (higherInvisibilityTime) {
+                        launchTimer /= 2.0f;
+                    }       
                     LaunchProjectile();
                 }
             }
@@ -536,16 +556,14 @@ public class Player: MonoBehaviour {
     // Collision
 
     void CheckGround() {
-        if (!isJumping && Physics2D.OverlapBox(groundCheckPoint.position, groundCheckSize, 0, groundLayer)) {
+        bool againstGround = !isJumping || rigidBody.velocity.y <= 0.0f;
+        if (againstGround && Physics2D.OverlapBox(groundCheckPoint.position, groundCheckSize, 0, groundLayer)) {
             onGround = true;
+            isJumping = false;
         }
 
         if (isJumping) {
             onGround = false;
-        }
-
-        if (rigidBody.velocity.y <= 0.0f) {
-            isJumping = false;
         }
 
         if (!onGround && rigidBody.velocity.y < 0.0f) {
@@ -579,6 +597,10 @@ public class Player: MonoBehaviour {
     }
 
     public void Hurt(int damageAmount, bool stronger = false) {
+        if (higherInvisibilityTime) {
+            stronger = true;
+            damageAmount /= 2;
+        }
         if (invisibilityTimer > 0.0f) {
             return;        
         }
@@ -664,9 +686,15 @@ public class Player: MonoBehaviour {
     public void SetInvisible() {
         if (invisibilityTimer > 0.0f) {
             invisibilityTimer = maxInvisibleTime;
+            if (higherInvisibilityTime) {
+                invisibilityTimer = 2.0f * maxInvisibleTime;    
+            }
             return;
         }
         invisibilityTimer = maxInvisibleTime;
+        if (higherInvisibilityTime) {
+            invisibilityTimer = 2.0f * maxInvisibleTime;    
+        }
         blinkType = 1;
         Invoke("UpdateBlinkStatus", blinkCycleSeconds);
     }
@@ -769,6 +797,11 @@ public class Player: MonoBehaviour {
                     hasWallJump = true;
                     hasDoubleJump = true;
                     projectileType = 3;
+                    break;
+                case 5:
+                    higherInvisibilityTime = true;
+                    hasWallJump = true;
+                    hasDoubleJump = true;
                     break;
                 default:
                     break;

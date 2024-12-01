@@ -1666,10 +1666,11 @@ MonoBehaviour:
   state: 0
   health: 32
   maxHealth: 32
-  horizontalSpeed: 7.5
+  horizontalSpeed: 8.57
   accelerationRate: 3.5
   blinkCycleSeconds: 0.07
-  maxInvisibleTime: 1
+  maxInvisibleTime: 0.5
+  aggressiveForce: {x: -17, y: 15}
   direction: -1
   player: {fileID: 1337169991}
   destroyFx: {fileID: 843527598200146930, guid: 3f8a50f82013340498e083f937da1f41, type: 3}
@@ -1698,9 +1699,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!61 &2043200215
 BoxCollider2D:

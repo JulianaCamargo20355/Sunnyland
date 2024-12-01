@@ -1481,9 +1481,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!61 &1728700303
 BoxCollider2D:
@@ -1494,7 +1494,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1728700298}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bda966781ec8ff34a814d310313a5d5e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1517,7 +1517,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.053691693, y: -0.07027159}
+  m_Offset: {x: 0.10364961, y: -0.07027159}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1528,7 +1528,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.47509456, y: 0.24945681}
+  m_Size: {x: 0.57501036, y: 0.24945681}
   m_EdgeRadius: 0
 --- !u!114 &1728700304
 MonoBehaviour:
@@ -1545,11 +1545,11 @@ MonoBehaviour:
   state: 0
   health: 32
   maxHealth: 32
-  horizontalSpeed: 24
-  accelerationRate: 5
+  horizontalSpeed: 20
+  accelerationRate: 3
   blinkCycleSeconds: 0.07
-  maxInvisibleTime: 1
-  aggressiveForce: {x: 30, y: 2}
+  maxInvisibleTime: 0.7
+  aggressiveForce: {x: 20, y: 2.5}
   generalTimer: 0
   direction: -1
   player: {fileID: 1714560543}

@@ -41,10 +41,10 @@ public class Werewolf: MonoBehaviour {
     void Update() {
         generalTimer += Time.deltaTime;
         switch (state) {
-            case 0: // Frog
+            case 0:
                 StandUpdate();
                 break;
-            case 1: // Opossum
+            case 1:
                 RunUpdate();
                 break;
             case 2:
@@ -55,24 +55,6 @@ public class Werewolf: MonoBehaviour {
                 break;
             default:
                 break;
-        }
-
-        float animationTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        animationTime = animationTime % 1;
-
-        if (state != 3 && animationTime >= 24.0f / 25.0f) {
-            Jump();
-            state = 3;
-            timer = 0.0f;
-        } else if (state != 2 && animationTime >= 18.0f / 25.0f) {
-            state = 2; // Attack
-            timer = 0.0f;
-            shaker.SendMessage("Shake", 1.2f);
-        } else if (state != 1 && animationTime >= 12.0f / 25.0f) {
-            state = 1;
-            timer = 0.0f;
-        } else if (animationTime >= 6.0f / 25.0f) {
-            state = 0;
         }
 
         if (player.transform.position.x > transform.position.x) {
@@ -91,6 +73,37 @@ public class Werewolf: MonoBehaviour {
         UpdateSprite();
     }
 
+    // Animator events
+
+    void OnJump() {
+        if (state != 3) {
+            Jump();
+            state = 3;
+            timer = 0.0f;
+        }
+    }
+
+    void OnAttack() {
+        if (state != 2) {
+            state = 2; // Attack
+            timer = 0.0f;
+            shaker.SendMessage("Shake", 1.2f);
+        }
+    }
+
+    void OnRun() {
+        if (state != 1) {
+            state = 1;
+            timer = 0.0f;
+        }
+    }
+
+    void OnAnimationFinish() {
+        if (state != 0) {
+            state = 0;
+        }
+    }
+
     void StandUpdate() {
         timer += Time.deltaTime;
         Run(1.0f, 0.0f);
@@ -99,21 +112,15 @@ public class Werewolf: MonoBehaviour {
     void RunUpdate() {
         Run(1.0f, 1.0f);
         timer += Time.deltaTime;
-        float animationTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        animationTime = animationTime % 1;
     }
 
     void AttackUpdate() {
         rigidBody.velocity = new Vector3(0.0f, rigidBody.velocity.y, 0.0f);
         timer += Time.deltaTime;
-        float animationTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        animationTime = animationTime % 1;
         Run(1.0f, 0.0f);
     }
 
     void JumpUpdate() {
-        float animationTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        animationTime = animationTime % 1;
         Run(1.0f, 0.0f);
     }
 

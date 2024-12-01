@@ -55,23 +55,6 @@ public class Troll: MonoBehaviour {
             direction = -1.0f;
         }
 
-        float animationTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        animationTime = animationTime % 1;
-
-        if (rigidBody.velocity.y == 0.0f) {
-            if (state != 2 && animationTime >= 14.0f / 19.0f) {
-                state = 2; // Attack
-                shaker.SendMessage("Shake", 1.2f);
-                if (Random.value < 0.5f) {
-                    attacker.SendMessage("AttackPlayer");
-                }
-            } else if (state != 1 && animationTime >= 9.0f / 19.0f) {
-                state = 1;
-            } else if (state != 0) {
-                state = 0;
-            }
-        }
-
         dashTimer += Time.deltaTime;
         if (dashTimer >= 5.0f) {
             dashTimer = 0.0f;
@@ -86,6 +69,29 @@ public class Troll: MonoBehaviour {
             }
         }
         UpdateSprite();
+    }
+
+    // Animator events
+
+    void OnWalk() {
+        state = 1;
+    }
+
+    void OnAttack() {
+        if (state != 2) {
+            state = 2; // Attack
+            shaker.SendMessage("Shake", 1.2f);
+            if (Random.value < 0.5f) {
+                attacker.SendMessage("AttackPlayer");
+            }
+        }
+    }
+
+    void OnAnimationFinish() {
+        if (state != 0) {
+            state = 0;
+            Jump();
+        }
     }
 
     void Run(float lerpAmount, float factor) {
@@ -175,12 +181,6 @@ public class Troll: MonoBehaviour {
         } else {
             spriteRenderer.enabled = false;
             spriteRenderer.color = Color.red;
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Ground")) {
-            state = 0;
         }
     }
 }

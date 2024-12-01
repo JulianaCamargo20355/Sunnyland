@@ -12,6 +12,7 @@ public class Ogre: MonoBehaviour {
     public float accelerationRate = 2.0f;
     public float blinkCycleSeconds = 0.07f;
     public float maxInvisibleTime = 1.0f;
+    public Vector2 aggressiveForce = new Vector2(-30.0f, 15.0f);
 
     public float direction = -1.0f;
     private float invisibilityTimer;
@@ -52,21 +53,6 @@ public class Ogre: MonoBehaviour {
             direction = -1.0f;
         }
 
-        float animationTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        animationTime = animationTime % 1;
-
-        if (state != 2 && animationTime >= 13.0f / 15.0f) {
-            state = 2; // Attack
-            shaker.SendMessage("Shake", 1.2f);
-            if (player.onGround) {
-                player.Hurt(2, true);
-            }
-        } else if (state != 1 && animationTime >= 8.0f / 25.0f) {
-            state = 1;
-        } else if (state != 0) {
-            state = 0;
-        }
-
         if (invisibilityTimer > 0.0f) {
             invisibilityTimer -= Time.deltaTime;
             if (invisibilityTimer <= 0.0f) {
@@ -83,6 +69,18 @@ public class Ogre: MonoBehaviour {
         float speedDif = targetSpeed - rigidBody.velocity.x;
 		float movement = speedDif * accelerationRate;
 		rigidBody.AddForce(movement * Vector2.right, ForceMode2D.Force);
+    }
+
+    void Jump() {
+        Vector2 force = new Vector2(aggressiveForce.x, aggressiveForce.y);
+        force.x *= direction; // Towards player
+		if (Mathf.Sign(rigidBody.velocity.x) != Mathf.Sign(force.x)) {
+			force.x -= rigidBody.velocity.x;
+        }
+		if (rigidBody.velocity.y < 0) {
+			force.y -= rigidBody.velocity.y;
+        }
+		rigidBody.AddForce(force, ForceMode2D.Impulse);
     }
 
     void StandUpdate() {
@@ -158,6 +156,29 @@ public class Ogre: MonoBehaviour {
     void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Ground")) {
             state = 0;
+        }
+    }
+
+    // Animator events
+
+    void OnWalk() {
+        state = 1;
+    }
+
+    void OnAttack() {
+        if (state != 2) {
+            state = 2; // Attack
+            shaker.SendMessage("Shake", 1.2f);
+            if (player.onGround) {
+                player.Hurt(2, true);
+            }
+        }
+    }
+
+    void OnAnimationFinish() {
+        if (state != 0) {
+            state = 0;
+            Jump();
         }
     }
 }

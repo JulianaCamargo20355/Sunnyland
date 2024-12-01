@@ -14,6 +14,11 @@ public class BossProjectile : MonoBehaviour {
         playerPos = new Vector3(player.transform.position.x, player.transform.position.y, 0.0f);
         Vector3 aim = (playerPos - transform.position).normalized;
         rigidBody.AddForce(aim * bulletMomentum, ForceMode2D.Impulse);
+        Quaternion rotation = Quaternion.LookRotation(
+            playerPos - transform.position,
+            transform.TransformDirection(Vector3.up)
+        );
+        transform.rotation = new Quaternion(0.0f, 0.0f, rotation.z , rotation.w);
     }
 
     void OnTriggerEnter2D(Collider2D other) {

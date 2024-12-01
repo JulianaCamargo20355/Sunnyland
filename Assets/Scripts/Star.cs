@@ -23,7 +23,7 @@ public class Star: MonoBehaviour {
     void Update() {
         if (active) {
             spriteRenderer.color = Color.white;
-            transform.position = startPosition + Vector3.up * height * Mathf.Cos(rhythm * Time.time);
+            transform.position = startPosition + Vector3.up * height * Mathf.Sin(rhythm * Time.time);
         } else {
             Color c = Color.blue;
             c.a = 0.42f;

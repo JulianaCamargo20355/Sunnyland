@@ -13,6 +13,8 @@ public class Enemy: MonoBehaviour {
     public float frogBigJumpSpeed;
     public float frogTimeOnGround;
     public Player player;
+    [SerializeField] private GameObject plantProjectile;
+    public float rabbitForce = 2.5f;
 
     // Enemy movement
     private Rigidbody2D rigidBody;
@@ -51,7 +53,16 @@ public class Enemy: MonoBehaviour {
                 StartFrog();
                 break;
             case 1: // Opossum
-                StartOpossum();
+                // Stub
+                break;
+            case 2: // Plant
+                // Stub
+                break;
+            case 3: // Slime
+                // Stub
+                break;
+            case 4: // Bunny
+                StartRabbit();
                 break;
             default:
                 break;
@@ -67,6 +78,15 @@ public class Enemy: MonoBehaviour {
                 break;
             case 1: // Opossum
                 UpdateOpossum();
+                break;
+            case 2: // Plant
+                UpdatePlant();
+                break;
+            case 3: // Slime
+                // Stub
+                break;
+            case 4:
+                UpdateRabbit();
                 break;
             default:
                 break;
@@ -107,16 +127,54 @@ public class Enemy: MonoBehaviour {
         rigidBody.AddForce(Vector2.up * frogBigJumpSpeed, ForceMode2D.Impulse);
     }
 
-    void StartOpossum() {
-
-    }
-
     void UpdateOpossum() {
         if (direction == 1.0f) {
             rigidBody.velocity = new Vector3(horizontalSpeed, rigidBody.velocity.y, 0.0f);
         } else {
             rigidBody.velocity = new Vector3(-horizontalSpeed, rigidBody.velocity.y, 0.0f);
         }
+    }
+
+    void UpdatePlant() {
+        if (player.transform.position.x > transform.position.x) {
+            direction = 1.0f;
+        } else {
+            direction = -1.0f;
+        }
+    }
+
+    void StartRabbit() {
+        InvokeRepeating("RabbitJump", 0.0f, 1.5f);
+    }
+
+    void UpdateRabbit() {
+        if (rigidBody.velocity.y == 0.0f && Physics2D.OverlapBox(transform.position, groundCheckSize, 0, groundLayer)) {
+            rigidBody.velocity = new Vector2(0.0f, 0.0f);
+        }
+    }
+
+    void RabbitJump() {
+        if (direction == 1.0f) {
+            direction = -1.0f;
+        } else {
+            direction = 1.0f;
+        }
+        
+        if (rigidBody.velocity.y == 0.0f && Physics2D.OverlapBox(transform.position, groundCheckSize, 0, groundLayer)) {
+            float forceX = rabbitForce * direction;
+            float forceY = rabbitForce;
+            rigidBody.AddForce(new Vector2(forceX, forceY), ForceMode2D.Impulse);
+        }
+    }
+
+    // Animator events
+
+    void OnShoot() {
+        if (!plantProjectile) {
+            return;
+        }
+        GameObject proj = Instantiate(plantProjectile, transform.position, Quaternion.identity);
+        proj.SendMessage("SetPlayer", player);
     }
 
     public void Hurt(int v) {
