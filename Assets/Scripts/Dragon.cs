@@ -19,6 +19,7 @@ public class Dragon : MonoBehaviour
     public float shootRate = 0.45f;
     public float changeRate = 0.7f;
     private int shootCount = 0;
+    public float hopForce = 0.5f;
 
     // Timers
     private float invisibilityTimer;
@@ -31,8 +32,8 @@ public class Dragon : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private GameObject destroyFx;
     [SerializeField] private GameObject shaker;
-    private Vector3 startPosition;
-    private Vector3 targetPosition;
+    [SerializeField] private Vector3 startPosition;
+    [SerializeField] private Vector3 targetPosition;
 
     // Boss components
     private Rigidbody2D rigidBody;
@@ -50,6 +51,8 @@ public class Dragon : MonoBehaviour
         startPosition = transform.position;
         targetPosition = GetNextPosition();
         fireTimer = fireRate;
+
+        accelerationRate = ((1.0f / Time.fixedDeltaTime) * accelerationRate) / horizontalSpeed;
     }
 
     void Update() {
@@ -75,6 +78,10 @@ public class Dragon : MonoBehaviour
                 timer = 7.5f * changeRate * Random.value;
             }
         } 
+
+        if (transform.position.y <= 0.0f) {
+            rigidBody.AddForce(Vector2.up * hopForce, ForceMode2D.Impulse);
+        }
 
         if (invisibilityTimer > 0.0f) {
             invisibilityTimer -= Time.deltaTime;
@@ -110,17 +117,15 @@ public class Dragon : MonoBehaviour
     }
 
     void RunState() {
-        if (transform.position.x < targetPosition.x) {
-            direction = -1.0f;
-            animator.Play("DragonWalk");
-        } else {
-            direction = 1.0f;
+        if (direction == 1.0f) {
             animator.Play("DragonWalk2");
+        } else {
+            animator.Play("DragonWalk");
         }
 
         Run(1.0f, 1.0f);
 
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f) {
+        if (Mathf.Abs(transform.position.x - targetPosition.x) < 0.1f) {
             targetPosition = GetNextPosition();
         }
     }
@@ -136,12 +141,13 @@ public class Dragon : MonoBehaviour
 
     Vector3 GetNextPosition() {
         Vector3 nextPosition = startPosition;
-
-        if (Random.value > 0.5f) {
-            nextPosition.x += Random.Range(-areaWidth, areaWidth);
+        float displacement = Random.Range(-areaWidth, areaWidth);
+        if (displacement < 0.0f) {
+            direction = -1.0f;
+        } else {
+            direction = 1.0f;
         }
-
-        nextPosition.x = Mathf.Clamp(nextPosition.x, startPosition.x - areaWidth, startPosition.x + areaWidth);
+        nextPosition.x += displacement;
         return nextPosition;
     }
 
