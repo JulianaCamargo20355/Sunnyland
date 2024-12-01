@@ -90,6 +90,7 @@ public class Player: MonoBehaviour {
     public int enemiesDestroyed;
     public Star star;
     public bool higherInvisibilityTime = false;
+    public int damageFactor = 1;
 
     // Rendering
     private SpriteRenderer spriteRenderer;
@@ -100,7 +101,10 @@ public class Player: MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         if (abilityToGain > 0) {
-            projectileType = abilityToGain - 1;
+            projectileType = abilityToGain - 2;
+            if (projectileType < 0) {
+                projectileType = 0;
+            }
             if (projectileType > 3) {
                 projectileType = 3;
             }
@@ -157,6 +161,10 @@ public class Player: MonoBehaviour {
 
         if (Input.GetKeyDown("k")) {
             Knockback(1.0f);
+        }
+
+        if (Input.GetKeyDown("g")) {
+            damageFactor = 2;
         }
 
         if (onWater) {
@@ -377,7 +385,11 @@ public class Player: MonoBehaviour {
     }
 
     void HurtUpdate() {
-        if (invisibilityTimer > maxInvisibleTime / 2.0f) {
+        float maxTimer = maxInvisibleTime;
+        if (higherInvisibilityTime) {
+            maxTimer = 2.0f * maxInvisibleTime;    
+        };
+        if (invisibilityTimer > maxTimer / 2.0f) {
             invisibilityTimer -= Time.deltaTime;
             animator.Play("Hurt");
             CancelSpeed(1.0f);
@@ -602,7 +614,7 @@ public class Player: MonoBehaviour {
         if (invisibilityTimer > 0.0f) {
             return;        
         }
-        health -= damageAmount;
+        health -= damageAmount / damageFactor;
         UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.PlayerHealth, health / (float) maxHealth);
         if (health <= 0) {
             Kill();
