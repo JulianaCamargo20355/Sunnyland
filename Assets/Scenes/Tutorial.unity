@@ -688,8 +688,8 @@ MonoBehaviour:
   m_RefResolutionY: 240
   m_UpscaleRT: 0
   m_PixelSnapping: 0
-  m_CropFrameX: 0
-  m_CropFrameY: 0
+  m_CropFrameX: 1
+  m_CropFrameY: 1
   m_StretchFill: 0
 --- !u!1001 &552982051
 PrefabInstance:
@@ -7066,6 +7066,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUDCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5984251248984145465, guid: 47982d09b583c0c41add99fccbef4016, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 5984251248984145465, guid: 47982d09b583c0c41add99fccbef4016, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645826647716468179, guid: 47982d09b583c0c41add99fccbef4016, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6645826647716468179, guid: 47982d09b583c0c41add99fccbef4016, type: 3}
       propertyPath: m_ReferenceResolution.x
       value: 848
@@ -7073,6 +7085,10 @@ PrefabInstance:
     - target: {fileID: 6645826647716468179, guid: 47982d09b583c0c41add99fccbef4016, type: 3}
       propertyPath: m_ReferenceResolution.y
       value: 480
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645826647716468179, guid: 47982d09b583c0c41add99fccbef4016, type: 3}
+      propertyPath: m_ReferencePixelsPerUnit
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
