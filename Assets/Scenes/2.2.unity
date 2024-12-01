@@ -327,7 +327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5343125520604122586, guid: 1138beb8c2ae81640955eea91cab33d3, type: 3}
       propertyPath: abilityToGain
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5343125520604122586, guid: 1138beb8c2ae81640955eea91cab33d3, type: 3}
       propertyPath: groundLayer.m_Bits
@@ -1233,9 +1233,47 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 890553539}
+    m_ColliderPaths:
+    - - X: 100000000
+        Y: 50000000
+      - X: 90000000
+        Y: 50000000
+      - X: 90000000
+        Y: -30000000
+      - X: 100000000
+        Y: -30000000
+    - - X: -90000000
+        Y: 50000000
+      - X: -100000000
+        Y: 50000000
+      - X: -100000000
+        Y: -30000000
+      - X: -90000000
+        Y: -30000000
+    - - X: 90000000
+        Y: -30000000
+      - X: -90000000
+        Y: -30000000
+      - X: -90000000
+        Y: -50000000
+      - X: 90000000
+        Y: -50000000
   m_CompositePaths:
-    m_Paths: []
+    m_Paths:
+    - - {x: 9.99997, y: -3}
+      - {x: 9.99997, y: 5}
+      - {x: 9, y: 4.999971}
+      - {x: 9.00003, y: -3}
+    - - {x: -9.00003, y: -3}
+      - {x: -9.00003, y: 5}
+      - {x: -10, y: 4.999971}
+      - {x: -9.99997, y: -3}
+    - - {x: 8.99997, y: -5}
+      - {x: 8.99997, y: -3}
+      - {x: -9, y: -3.0000293}
+      - {x: -8.99997, y: -5}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -1298,7 +1336,7 @@ TilemapCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
@@ -1666,11 +1704,11 @@ MonoBehaviour:
   state: 0
   health: 32
   maxHealth: 32
-  horizontalSpeed: 8.57
-  accelerationRate: 3.5
+  horizontalSpeed: 3.5
+  accelerationRate: 2
   blinkCycleSeconds: 0.07
   maxInvisibleTime: 0.5
-  aggressiveForce: {x: -17, y: 15}
+  aggressiveForce: {x: -25, y: 2}
   direction: -1
   player: {fileID: 1337169991}
   destroyFx: {fileID: 843527598200146930, guid: 3f8a50f82013340498e083f937da1f41, type: 3}
@@ -1691,7 +1729,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 4
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: bda966781ec8ff34a814d310313a5d5e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1735,7 +1773,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.09137118, y: 0.0030020028}
+  m_Offset: {x: -0.049728185, y: -0.060763896}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1746,7 +1784,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.31725764, y: 0.40399596}
+  m_Size: {x: 0.21835527, y: 0.27646416}
   m_EdgeRadius: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

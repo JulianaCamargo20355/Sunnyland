@@ -153,12 +153,12 @@ public class Enemy: MonoBehaviour {
     void UpdateRabbit() {
         if (rigidBody.velocity.y == 0.0f && Physics2D.OverlapBox(transform.position, groundCheckSize, 0, groundLayer)) {
             rigidBody.velocity = new Vector2(0.0f, 0.0f);
-            animator.Play("RabbitIdle");
+            animator.Play("bunny1");
         } else {
             if (rigidBody.velocity.y > 0.0f) {
-                animator.Play("RabbitJump");
+                animator.Play("BunnyJump");
             } else {
-                animator.Play("RabbitFall");
+                animator.Play("BunnyFall");
             }
         }
     }

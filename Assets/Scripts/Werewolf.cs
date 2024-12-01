@@ -101,10 +101,6 @@ public class Werewolf: MonoBehaviour {
 
     void OnAnimationFinish() {
         if (state != 0) {
-            if (Vector3.Distance(player.transform.position, transform.position) <= 3.0f) {
-                Debug.Log("Back down");
-                Jump();
-            }
             state = 0;
         }
     }

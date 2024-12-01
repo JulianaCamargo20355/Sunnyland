@@ -226,11 +226,11 @@ public class Player: MonoBehaviour {
         }
         if (state != 2 && invisibilityTimer > 0.0f) {
             invisibilityTimer -= Time.deltaTime;
-            if (invisibilityTimer <= 0.0f) {
-                // Refresh status 
-                invisibilityTimer = 0;
-                blinkType = 0;
-            }
+        }
+        if (invisibilityTimer <= 0.0f) {
+            // Refresh status 
+            invisibilityTimer = 0;
+            blinkType = 0;
         }
     }
 
@@ -707,11 +707,11 @@ public class Player: MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Hazard")) {
-            Hurt(8);
+            Hurt(4);
         }
 
         if (other.gameObject.CompareTag("Enemy")) {
-            Hurt(8);
+            Hurt(4);
         }
 
         if (other.gameObject.CompareTag("InstantDeath")) {
@@ -733,11 +733,11 @@ public class Player: MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Hazard")) {
-            Hurt(8);
+            Hurt(4);
         }
 
         if (other.gameObject.CompareTag("Enemy")) {
-            Hurt(8);
+            Hurt(4);
         }
 
         if (other.gameObject.CompareTag("InstantDeath")) {

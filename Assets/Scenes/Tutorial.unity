@@ -5884,7 +5884,7 @@ Transform:
   m_GameObject: {fileID: 1346484744}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.7000003, y: 0.069999695, z: 0}
+  m_LocalPosition: {x: -6.8, y: 0.069999695, z: 0}
   m_LocalScale: {x: 3.8195, y: 3.8195, z: 3.8195}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6958,6 +6958,8 @@ MonoBehaviour:
   frogBigJumpSpeed: 4
   frogTimeOnGround: 1.5
   player: {fileID: 1238307131}
+  plantProjectile: {fileID: 0}
+  rabbitForce: 2.5
   direction: -1
   groundCheckSize: {x: 0.13, y: 1.2}
   groundLayer:
@@ -7174,6 +7176,8 @@ MonoBehaviour:
   frogBigJumpSpeed: 4
   frogTimeOnGround: 1.5
   player: {fileID: 1238307131}
+  plantProjectile: {fileID: 0}
+  rabbitForce: 2.5
   direction: -1
   groundCheckSize: {x: 0.13, y: 0.2}
   groundLayer:

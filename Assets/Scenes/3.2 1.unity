@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 697963135}
   - component: {fileID: 697963137}
   - component: {fileID: 697963136}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BlueTroll_0
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -412,13 +412,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  health: 32
-  maxHealth: 32
-  horizontalSpeed: 10.5
-  accelerationRate: 2
+  health: 64
+  maxHealth: 64
+  horizontalSpeed: 7
+  accelerationRate: 1
   blinkCycleSeconds: 0.07
   maxInvisibleTime: 0.4
-  aggressiveForce: {x: -30, y: 12}
+  aggressiveForce: {x: -30, y: 5}
   direction: -1
   player: {fileID: 1774903869}
   destroyFx: {fileID: 843527598200146930, guid: 3f8a50f82013340498e083f937da1f41, type: 3}
@@ -457,7 +457,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.068971254}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -468,7 +468,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.45}
+  m_Size: {x: 0.4, y: 0.3120575}
   m_EdgeRadius: 0
 --- !u!50 &697963137
 Rigidbody2D:
@@ -1511,7 +1511,7 @@ Transform:
   m_GameObject: {fileID: 1298667107}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.25, y: 6.25, z: 0.86274207}
+  m_LocalPosition: {x: -6.75, y: 6.25, z: 0.86274207}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2265,11 +2265,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5343125520604122586, guid: 1138beb8c2ae81640955eea91cab33d3, type: 3}
       propertyPath: canBeHurt
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5343125520604122586, guid: 1138beb8c2ae81640955eea91cab33d3, type: 3}
       propertyPath: abilityToGain
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5343125520604122586, guid: 1138beb8c2ae81640955eea91cab33d3, type: 3}
       propertyPath: groundLayer.m_Bits

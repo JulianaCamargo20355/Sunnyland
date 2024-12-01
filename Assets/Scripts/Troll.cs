@@ -32,6 +32,7 @@ public class Troll: MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         UIEnergyBars.Instance.SetVisibility(UIEnergyBars.EnergyBars.BossHealth, true);
+        accelerationRate = ((1.0f / Time.fixedDeltaTime) * accelerationRate) / horizontalSpeed;
     }
 
     void Update() {
@@ -58,7 +59,9 @@ public class Troll: MonoBehaviour {
         dashTimer += Time.deltaTime;
         if (dashTimer >= 5.0f) {
             dashTimer = 0.0f;
-            Jump();
+            if (rigidBody.velocity.y == 0.0f) {
+                Jump();
+            }
         }
 
         if (invisibilityTimer > 0.0f) {
@@ -80,9 +83,10 @@ public class Troll: MonoBehaviour {
     void OnAttack() {
         if (state != 2) {
             state = 2; // Attack
-            shaker.SendMessage("Shake", 1.2f);
-            if (Random.value < 0.5f) {
-                attacker.SendMessage("AttackPlayer");
+            shaker.SendMessage("Shake", 1.4f);
+            attacker.SendMessage("AttackPlayer");
+            if (player.onGround) {
+                player.Hurt(2, true);
             }
         }
     }
@@ -181,6 +185,13 @@ public class Troll: MonoBehaviour {
         } else {
             spriteRenderer.enabled = false;
             spriteRenderer.color = Color.red;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Player")) {
+            Hurt(1);
+            Jump();
         }
     }
 }

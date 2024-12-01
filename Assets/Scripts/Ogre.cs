@@ -30,6 +30,7 @@ public class Ogre: MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         UIEnergyBars.Instance.SetVisibility(UIEnergyBars.EnergyBars.BossHealth, true);
+        accelerationRate = ((1.0f / Time.fixedDeltaTime) * accelerationRate) / horizontalSpeed;
     }
 
     void Update() {
@@ -153,12 +154,6 @@ public class Ogre: MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Ground")) {
-            state = 0;
-        }
-    }
-
     // Animator events
 
     void OnWalk() {
@@ -170,7 +165,7 @@ public class Ogre: MonoBehaviour {
             state = 2; // Attack
             shaker.SendMessage("Shake", 1.2f);
             if (player.onGround) {
-                player.Hurt(2, true);
+                player.Hurt(1, true);
             }
         }
     }
@@ -178,6 +173,12 @@ public class Ogre: MonoBehaviour {
     void OnAnimationFinish() {
         if (state != 0) {
             state = 0;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Player")) {
+            Hurt(4);
             Jump();
         }
     }
