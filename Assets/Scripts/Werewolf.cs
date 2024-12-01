@@ -36,6 +36,7 @@ public class Werewolf: MonoBehaviour {
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         UIEnergyBars.Instance.SetVisibility(UIEnergyBars.EnergyBars.BossHealth, true);
+        accelerationRate = ((1.0f / Time.fixedDeltaTime) * accelerationRate) / horizontalSpeed;
     }
 
     void Update() {
@@ -100,6 +101,10 @@ public class Werewolf: MonoBehaviour {
 
     void OnAnimationFinish() {
         if (state != 0) {
+            if (Vector3.Distance(player.transform.position, transform.position) <= 3.0f) {
+                Debug.Log("Back down");
+                Jump();
+            }
             state = 0;
         }
     }
@@ -199,6 +204,13 @@ public class Werewolf: MonoBehaviour {
         } else {
             spriteRenderer.enabled = false;
             spriteRenderer.color = Color.red;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Player")) {
+            Hurt(4);
+            Jump();
         }
     }
 }

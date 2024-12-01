@@ -339,12 +339,14 @@ public class Player: MonoBehaviour {
     }
 
     void WinUpdate() {
+        canBeHurt = false;
         rigidBody.velocity = new Vector2(0.0f, rigidBody.velocity.y);
         if (onGround && rigidBody.velocity.y <= 0.0f && winTimer > 0.0f) {
             winTimer -= Time.deltaTime;
             if (winTimer <= 0.0f) {
                 // Next scene
                 winTimer = 2.0f;
+                canBeHurt = true;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
             animator.Play("Victory");
@@ -593,6 +595,9 @@ public class Player: MonoBehaviour {
         if (higherInvisibilityTime) {
             stronger = true;
             damageAmount /= 2;
+        }
+        if (!canBeHurt) {
+            return;
         }
         if (invisibilityTimer > 0.0f) {
             return;        

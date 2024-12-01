@@ -320,7 +320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1137569503}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 1300562134}
   - component: {fileID: 1300562132}
   - component: {fileID: 1300562135}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RedDragon_2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -594,7 +594,7 @@ Transform:
   m_GameObject: {fileID: 1300562128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 5, y: -0.5, z: 0}
+  m_LocalPosition: {x: 2, y: -0.5, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -610,7 +610,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1300562128}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bda966781ec8ff34a814d310313a5d5e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -661,18 +661,22 @@ MonoBehaviour:
   state: 0
   health: 64
   maxHealth: 64
-  horizontalSpeed: 5
-  accelerationRate: 5
+  horizontalSpeed: 7
+  accelerationRate: 2.5
   blinkCycleSeconds: 0.07
   maxInvisibleTime: 0.7
   aggressiveForce: {x: 10, y: 4}
-  areaWidth: 12
+  areaWidth: 6
   fireRate: 1
+  shootRate: 0.45
   changeRate: 0.55
-  direction: 1
+  hopForce: 0.3
+  direction: -1
   player: {fileID: 1593989111}
   destroyFx: {fileID: 843527598200146930, guid: 3f8a50f82013340498e083f937da1f41, type: 3}
   shaker: {fileID: 372566803}
+  startPosition: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   animator: {fileID: 0}
   fireballPrefab: {fileID: 7409022838748360808, guid: de6eaf57c95508c4db0068507baa13a7, type: 3}
   firePoint: {fileID: 1137569503}
@@ -692,7 +696,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bda966781ec8ff34a814d310313a5d5e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1450,9 +1454,71 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 1399487516}
+    m_ColliderPaths:
+    - - X: 100000000
+        Y: 70000000
+      - X: 90000000
+        Y: 70000000
+      - X: 90000000
+        Y: -30000000
+      - X: 100000000
+        Y: -30000000
+    - - X: -90000000
+        Y: 70000000
+      - X: -100000000
+        Y: 70000000
+      - X: -100000000
+        Y: -30000000
+      - X: -90000000
+        Y: -30000000
+    - - X: 80000000
+        Y: -45625000
+      - X: 80000000
+        Y: -40000000
+      - X: 87500000
+        Y: -40000000
+      - X: 90000000
+        Y: -35625000
+      - X: 90000000
+        Y: -30000000
+      - X: -90000000
+        Y: -30000000
+      - X: -90000000
+        Y: -36250000
+      - X: -85000000
+        Y: -40000000
+      - X: -80000000
+        Y: -40000000
+      - X: -80000000
+        Y: -46250000
+      - X: -75000000
+        Y: -50000000
+      - X: 77500000
+        Y: -50000000
   m_CompositePaths:
-    m_Paths: []
+    m_Paths:
+    - - {x: 9.99997, y: -3}
+      - {x: 9.99997, y: 7}
+      - {x: 9, y: 6.9999704}
+      - {x: 9.00003, y: -3}
+    - - {x: -9.00003, y: -3}
+      - {x: -9.00003, y: 7}
+      - {x: -10, y: 6.9999704}
+      - {x: -9.99997, y: -3}
+    - - {x: 7.7499847, y: -5}
+      - {x: 8, y: -4.5624933}
+      - {x: 8.00003, y: -4}
+      - {x: 8.750008, y: -3.9999864}
+      - {x: 9, y: -3.5624933}
+      - {x: 8.99997, y: -3}
+      - {x: -9, y: -3.0000293}
+      - {x: -8.9999895, y: -3.625008}
+      - {x: -8.499991, y: -4}
+      - {x: -8, y: -4.0000296}
+      - {x: -7.9999895, y: -4.625008}
+      - {x: -7.4999914, y: -5}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -1515,7 +1581,7 @@ TilemapCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
