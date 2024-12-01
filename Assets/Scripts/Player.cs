@@ -565,17 +565,16 @@ public class Player: MonoBehaviour {
     // Collision
 
     void CheckGround() {
-        bool againstGround = !isJumping || rigidBody.velocity.y <= 0.0f;
-        if (againstGround && Physics2D.OverlapBox(groundCheckPoint.position, groundCheckSize, 0, groundLayer)) {
-            onGround = true;
+        bool hasGround = Physics2D.OverlapBox(groundCheckPoint.position, groundCheckSize, 0, groundLayer);
+        bool againstGround = !isJumping | rigidBody.velocity.y <= 0.0f;
+
+        onGround = hasGround & againstGround;
+
+        if (onGround) {
             isJumping = false;
         }
 
-        if (isJumping) {
-            onGround = false;
-        }
-
-        if (!onGround && rigidBody.velocity.y < 0.0f) {
+        if (!hasGround && rigidBody.velocity.y < 0.0f) {
             isFalling = true;
             isJumping = false;
             isJumpCut = false;
@@ -602,6 +601,7 @@ public class Player: MonoBehaviour {
         if (health > maxHealth) {
             health = maxHealth;
         }
+        UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.PlayerHealth, health / (float) maxHealth);
         //SetInvisible();
     }
 
@@ -739,6 +739,7 @@ public class Player: MonoBehaviour {
 
         if (other.gameObject.CompareTag("Fruit")) {
             other.gameObject.SendMessage("OnPlayerContact", this);
+            Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("Star")) {
@@ -761,6 +762,7 @@ public class Player: MonoBehaviour {
 
         if (other.gameObject.CompareTag("Fruit")) {
             other.gameObject.SendMessage("OnPlayerContact", this);
+            Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("Gem")) {

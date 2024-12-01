@@ -1704,7 +1704,7 @@ Transform:
   m_GameObject: {fileID: 2043200209}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 2.91, y: -0.92, z: 0}
+  m_LocalPosition: {x: 5.75, y: -0.24999994, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1726,10 +1726,10 @@ MonoBehaviour:
   health: 32
   maxHealth: 32
   horizontalSpeed: 3.5
-  accelerationRate: 2
+  accelerationRate: 1.5
   blinkCycleSeconds: 0.07
   maxInvisibleTime: 0.5
-  aggressiveForce: {x: -25, y: 2}
+  aggressiveForce: {x: -10, y: 2}
   direction: -1
   player: {fileID: 1337169991}
   destroyFx: {fileID: 843527598200146930, guid: 3f8a50f82013340498e083f937da1f41, type: 3}

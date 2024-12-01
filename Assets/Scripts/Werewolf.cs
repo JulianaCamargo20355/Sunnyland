@@ -205,7 +205,7 @@ public class Werewolf: MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Player")) {
-            Hurt(4);
+            Hurt(1);
             Jump();
         }
     }

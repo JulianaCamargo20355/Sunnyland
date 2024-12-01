@@ -21,13 +21,6 @@ public class BossProjectile : MonoBehaviour {
         transform.rotation = new Quaternion(0.0f, 0.0f, rotation.z , rotation.w);
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.CompareTag("Player")) {
-            other.gameObject.SendMessage("Hurt", 1);
-            Destroy(this.gameObject);
-        }
-    }
-
     public void SetPlayer(Player playerObject) {
         player = playerObject;
     }

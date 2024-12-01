@@ -195,7 +195,7 @@ MonoBehaviour:
   hasWallJump: 0
   abilityToGain: 0
   groundCheckPoint: {fileID: 5343125521321155645}
-  groundCheckSize: {x: 0.3, y: 0.11}
+  groundCheckSize: {x: 0.42, y: 0.11}
   groundLayer:
     serializedVersion: 2
     m_Bits: 9

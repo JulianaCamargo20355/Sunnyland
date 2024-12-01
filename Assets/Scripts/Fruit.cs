@@ -13,6 +13,5 @@ public class Fruit: MonoBehaviour {
 
     void OnPlayerContact(Player player) {
         player.OnFruitCollect(powerUpType);
-        Destroy(this.gameObject);
     }
 }

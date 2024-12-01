@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class CameraMovement : MonoBehaviour {
     public Vector3 offset = new Vector3(0f, 0f, -10f);
@@ -13,18 +14,24 @@ public class CameraMovement : MonoBehaviour {
     [SerializeField] private float clampPosition = 0.0f;
 
     [SerializeField] private Transform target;
+    [SerializeField] private OppositeParallax[] parallax;
+    private Vector3 newPosition;
+    private PixelPerfectCamera ppc;
 
     void Start() {
+        ppc = GetComponent<PixelPerfectCamera>();
+
         Vector3 targetPosition = target.position + offset;
         float targetX = targetPosition.x;
         float targetY = targetPosition.y;
         targetX = Mathf.Min(Mathf.Max(targetX, 0.0f), levelSize.x);
         targetY = Mathf.Max(Mathf.Min(targetY, 0.0f), -levelSize.y);
         targetPosition = new Vector3(targetX, targetY, targetPosition.z);
+        newPosition = targetPosition;
         transform.position = targetPosition;
     }
 
-    private void Update() {
+    private void LateUpdate() {
         Vector3 targetPosition = target.position + offset;
         float targetX = targetPosition.x;
         float targetY = targetPosition.y;
@@ -42,15 +49,33 @@ public class CameraMovement : MonoBehaviour {
             targetY = factor * (relativePos - 2.0f * n * cameraRange);
         }
 
-        targetX = Mathf.Min(Mathf.Max(targetX, 0.0f), levelSize.x);
+        targetX = Mathf.Min(Mathf.Max(targetX, 0.0f), levelSize.x) + 0.5f;
         targetY = Mathf.Max(Mathf.Min(targetY, 0.0f), -levelSize.y);
+
+        targetPosition = new Vector3(targetX, targetY, targetPosition.z);
 
         // Used for debugging
         if (cameraPos) {
-            cameraPos.transform.position = new Vector3(targetX, targetY, cameraPos.transform.position.z);
+            cameraPos.transform.position = targetPosition;
         }
+        
+        float pixelsPerUnit = 25.0f;
 
-        targetPosition = new Vector3(targetX, targetY, targetPosition.z);
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+        float velocityX = (newPosition.x - targetPosition.x) / smoothTime * Time.deltaTime;
+        float velocityY = (newPosition.y - targetPosition.y) / smoothTime * Time.deltaTime;
+        newPosition.x -= Mathf.Clamp(velocityX, -5.9f, 5.9f); 
+        newPosition.y -= Mathf.Clamp(velocityY, -5.9f, 5.9f);
+
+        // If damping needs to be removed:
+        //newPosition = targetPosition;
+
+        transform.position = new Vector3(Mathf.Round(newPosition.x *  pixelsPerUnit) / pixelsPerUnit, 
+            Mathf.Round(newPosition.y * pixelsPerUnit) / pixelsPerUnit, transform.position.z);
+        //transform.position = ppc.RoundToPixel(newPosition);
+        
+        foreach (OppositeParallax c in parallax) {
+            c.UpdatePosition(transform.position);
+        }
     }
+
 }

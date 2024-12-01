@@ -26,6 +26,10 @@ public class UIEnergyBars : MonoBehaviour {
     }
 
     void Start() {
+        if (Instance == null) {
+            Instance = this;
+        }
+        
         foreach (EnergyBars energyBar in Enum.GetValues(typeof(EnergyBars))) {
             energyBarsStructs[(int)energyBar].size = energyBarsStructs[(int)energyBar].mask.rectTransform.rect.height;
         }

@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: dfab70ae115e952419a3622dde8cdc7e
+  - enabled: 1
+    path: Assets/Scenes/ComoJogar.unity
+    guid: 5e09fdee02f774446b2ecf050eab5190
+  - enabled: 1
+    path: Assets/Scenes/Creditos.unity
+    guid: d410f70c10ddd6549acdd1c539ad61b5
+  - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -39,18 +48,9 @@ EditorBuildSettings:
     path: Assets/Scenes/5.2.unity
     guid: 22262f83e84a7db4f9e3ecfd564024e9
   - enabled: 1
-    path: Assets/Scenes/ComoJogar.unity
-    guid: 5e09fdee02f774446b2ecf050eab5190
-  - enabled: 1
-    path: Assets/Scenes/Creditos.unity
-    guid: d410f70c10ddd6549acdd1c539ad61b5
+    path: Assets/Scenes/Vitoria1.unity
+    guid: d8d7081d258b0104f90aaa8566b440f1
   - enabled: 1
     path: Assets/Scenes/Derrota.unity
     guid: 841e88a5a6db1e045ac124c6be7920c6
-  - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: dfab70ae115e952419a3622dde8cdc7e
-  - enabled: 1
-    path: Assets/Scenes/Vitoria1.unity
-    guid: d8d7081d258b0104f90aaa8566b440f1
   m_configObjects: {}

@@ -668,9 +668,9 @@ MonoBehaviour:
   aggressiveForce: {x: 10, y: 4}
   areaWidth: 3.5
   fireRate: 1
-  shootRate: 0.45
+  shootRate: 0.6
   changeRate: 0.55
-  hopForce: 0.2
+  hopForce: 0.1
   direction: -1
   player: {fileID: 1593989111}
   destroyFx: {fileID: 843527598200146930, guid: 3f8a50f82013340498e083f937da1f41, type: 3}
