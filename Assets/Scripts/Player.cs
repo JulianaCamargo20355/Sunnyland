@@ -601,7 +601,9 @@ public class Player: MonoBehaviour {
         if (health > maxHealth) {
             health = maxHealth;
         }
-        UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.PlayerHealth, health / (float) maxHealth);
+        if (UIEnergyBars.Instance) {
+            UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.PlayerHealth, health / (float) maxHealth);
+        }
         //SetInvisible();
     }
 
@@ -617,10 +619,14 @@ public class Player: MonoBehaviour {
             return;        
         }
         health -= damageAmount / damageFactor;
-        UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.PlayerHealth, health / (float) maxHealth);
+        if (UIEnergyBars.Instance) {
+            UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.PlayerHealth, health / (float) maxHealth);
+        }
         if (health <= 0) {
             Kill();
-            UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.PlayerHealth, 0.0f);
+            if (UIEnergyBars.Instance) {
+                UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.PlayerHealth, 0.0f);
+            }
             return;
         }
         if (!stronger) {

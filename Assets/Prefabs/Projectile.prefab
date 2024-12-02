@@ -104,9 +104,9 @@ MonoBehaviour:
   bulletSpeed: 10
   colors:
   - {r: 0.79622644, g: 0.67153436, b: 0.67153436, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0.99390316, b: 1, a: 1}
+  - {r: 1, g: 0.6008975, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0.944896, a: 1}
+  - {r: 1, g: 0, b: 0.03421831, a: 1}
   bulletType: 0
   direction: 0
   bulletDirection: 0

@@ -668,7 +668,7 @@ MonoBehaviour:
   aggressiveForce: {x: 10, y: 4}
   areaWidth: 3.5
   fireRate: 1
-  shootRate: 0.6
+  shootRate: 0.55
   changeRate: 0.55
   hopForce: 0.1
   direction: -1

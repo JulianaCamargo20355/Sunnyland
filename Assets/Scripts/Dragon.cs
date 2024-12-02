@@ -105,12 +105,12 @@ public class Dragon : MonoBehaviour {
             GameObject fireball = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
             fireball.SendMessage("SetPlayer", player);
             if (health < maxHealth / 4.0f) {
-                fireTimer -= 0.1f;
+                fireTimer = 0.4f;
                 fireball.GetComponent<SpriteRenderer>().color = Color.cyan;
             }
             shaker.SendMessage("Shake", 1.2f);
             shootCount += 1;
-            if (shootCount > 7) {
+            if (shootCount > 7 && health >= maxHealth / 4.0f || shootCount > 12 && health < maxHealth / 4.0) {
                 shootCount = 0;
                 state = 1;
             }
@@ -163,7 +163,9 @@ public class Dragon : MonoBehaviour {
             return;        
         }
         health -= v;
-        UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.BossHealth, health / (float) maxHealth);
+        if (UIEnergyBars.Instance) {
+            UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.BossHealth, health / (float) maxHealth);
+        }
         if (health <= 0) {
             Kill();
             return;
@@ -193,7 +195,9 @@ public class Dragon : MonoBehaviour {
 
     public void Kill() {
         health = 0;
-        UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.BossHealth, 0.0f);
+        if (UIEnergyBars.Instance) {
+            UIEnergyBars.Instance.SetValue(UIEnergyBars.EnergyBars.BossHealth, 0.0f);
+        }
         Instantiate(destroyFx, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
         player.CutJumpSpeed();
